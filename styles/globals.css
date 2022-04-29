@@ -1,9 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal&display=swap');
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Tajawal', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 a {
@@ -11,6 +16,62 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+header li {
+  transition: transform .18s ease, border .18s ease-in-out;
+}
+
+textarea::selection {
+  background: #0E185F;
+  color: #F9FAFE;
+}
+.ar {
+  direction: rtl;
+}
+
+.en {
+  direction: ltr;
+}
+
+.generated-circle {
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  transition: width .1s linear, height .1s linear;
+  opacity: .3;
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  animation: circle 1.1s ease-in-out infinite;
+  background: linear-gradient(102.92deg, #B388EB 28.41%, #FFC623 103.31%);
+}
+
+.pop-up {
+  animation: pop-up .5s ease-in-out;
+
+}
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .section-styling {
+    @apply w-[100%] h-[100vh] bg-white_color
+  }
+
+  form label {
+    @apply text-[1.3rem]
+  }
+
+  form input {
+    @apply w-[100%] h-[40px] p-[.45em] mt-2 border-b-2 focus:border-b-blue_color rounded-sm outline-none bg-transparent duration-75 transition-all ease-in
+  }
+
+  form textarea {
+    @apply w-[100%] h-[70px] max-h-[120px] bg-white_color p-[.45em] rounded-sm border-b-2 focus:border-b-blue_color outline-none
+  }
+
+  form textarea::placeholder,
+  form input::placeholder {
+    @apply text-black text-[1.1rem] opacity-60
+  }
 }
