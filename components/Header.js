@@ -1,50 +1,55 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome, faConciergeBell, faGlobe, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-export default function Header({ servicesRef, worksRef, homeRef }) {
+export default function Header({ isAdmin }) {
     const links = [
         {
-            title: "الخدمات",
-            href: "#services",
-            ref: servicesRef,
+            title: "لماذا انا",
+            href: "#whyme",
             icon: faConciergeBell
         },
         {
             title: "الاعمال",
             href: "#works",
-            ref: worksRef,
             icon: faGlobe
         },
         {
             title: "الصفحة الرئيسية",
             href: "#home",
-            ref: homeRef,
             icon: faHome
         },
     ];
+    const [isOpen, setIsOpen] = useState(false);
     const [activeLinkIndex, setActiveLinkIndex] = useState(links.length - 1);
-    const headerRef = useRef(null);
-    // useLayoutEffect(() => {
-    //     const handleScroll = () => {
-    //         const { current } = headerRef;
-    //         if (scrollY === 225) {
-    //             current.classList.add("backdrop-filter-blur[4px]")
-    //         } else {
-    //             current.classList.remove("backdrop-filter-blur[4px]")
-
-    //         }
-    //     }
-    //     window.addEventListener("scroll", handleScroll);
-    // }, [])
-    const scrollDown = index => {
-        links[index].ref.current?.scrollIntoView({ behavior: 'smooth' });
-        setActiveLinkIndex(index)
-    }
     return (
-        <header ref={headerRef} className="w-[100%] h-[70px] bg-white_color flex items-center fixed z-30">
-            <ul className="w-[35%] flex justify-between items-center mx-auto">
-                <li className="flex text-[#040C2D] text-[1.2rem] rounded-lg cursor-pointer hover:scale-[.92]">
+        <header className={`w-[100%] ${isOpen ? "sm:h-[300px]" : "sm:h-[40px]"} overflow-hidden md:h-[70px] bg-white_color sm:flex-col md:flex-row items-center flex fixed z-30`}>
+            <div className="w-[95%] sm:flex items-center justify-between md:hidden mt-3 ar">
+
+                <div onClick={() => setIsOpen(!isOpen)} className="w-[25px] h-[30px] flex flex-col items-center justify-center cursor-pointer relative">
+                    <div
+                        className={`
+                        menu-line menu-line-1 ${isOpen ? "rotate-[45deg] bg-red-500" : "absolute bottom-[22px] rotate-0"}
+                    `}>
+
+                    </div>
+                    <div className={`menu-line ml-auto w-[70%] menu-line-2 ${isOpen ? "opacity-0" : "opacity-100"}`}></div>
+                    <div
+                        className={`
+                        menu-line menu-line-3 ${isOpen ? "rotate-[-46deg] bg-red-500" : "absolute top-[22px] rotate-0"}
+                    `}></div>
+                </div>
+                <img src="/images/work-template.png" className="w-[25px] h-[25px]" alt="" />
+
+            </div>
+            <ul className="sm:w-[95%] sm:h-[220px] sm:mt-5 md:mt-0 md:w-[71%] lg:w-[50%] xl:w-[36%] sm:flex-col-reverse sm:items-end md:flex-row md:items-center justify-around flex mx-auto">
+                {
+                    isAdmin &&
+                    <li className="flex text-[#040C2D] sm:text-[1.1rem] md:text-[1.18rem] lg:text-[1.2rem] rounded-lg cursor-pointer hover:scale-[.92]">
+                        <Link href="/admin/">لوحة التحكم</Link>
+                        {/* <FontAwesomeIcon className="w-5 ml-3 text-blue_color" icon={faEnvelope} /> */}
+                    </li>
+                }
+                <li className="flex text-[#040C2D] sm:text-[1.1rem] md:text-[1.18rem] lg:text-[1.2rem] rounded-lg cursor-pointer hover:scale-[.92]">
                     <Link href="/contact-me">تواصل معي</Link>
                     {/* <FontAwesomeIcon className="w-5 ml-3 text-blue_color" icon={faEnvelope} /> */}
                 </li>
@@ -52,16 +57,22 @@ export default function Header({ servicesRef, worksRef, homeRef }) {
                     links.map(({ title, icon, href }, index) =>
                         <li
                             key={index}
-                            onClick={() => scrollDown(index)}
+                            onClick={() => {
+                                setActiveLinkIndex(index)
+                                setIsOpen(!isOpen)
+                            }}
                             className="
-                        text-[1.2rem] 
+                            sm:text-[1.1rem]
+                            md:text-[1.15rem]
+                        lg:text-[1.2rem] 
                         cursor-pointer 
                         hover:scale-[.92] 
                         block">
-                            <div style={{ transition: "width .3s ease-in-out" }} className={`${activeLinkIndex === index ? "w-8" : "w-0"} rounded ml-auto h-1 bg-[#0E185F]`}></div>
+                            <div
+                                style={{ transition: "width .3s ease-in-out", background: "linear-gradient(129.85deg, #3B82F6 24.63%, #B388EB 90.62%)" }}
+                                className={`${activeLinkIndex === index ? "w-8" : "w-0"} rounded ml-auto h-1`}></div>
                             <div className="flex">
                                 <Link href={href}>{title}</Link>
-                                {/* <FontAwesomeIcon className="w-5 ml-3 text-blue_color" icon={icon} /> */}
                             </div>
                         </li>
                     )

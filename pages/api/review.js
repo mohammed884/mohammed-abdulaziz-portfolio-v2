@@ -3,7 +3,8 @@ import dbConnect from "../../utilities/dbConnect";
 import multer from "multer";
 import nc from "next-connect";
 import { nanoid } from 'nanoid';
-import ReviewSchema from "../../validation/review";
+import reviewSchema from "../../validation/review";
+import dayjs from "dayjs";
 const upload = multer({
     storage: multer.diskStorage({
         destination: './public/uploads',
@@ -20,7 +21,6 @@ const handler = nc({
     },
 })
 handler.use(upload.single("cover"));
-
 handler.get(async (req, res) => {
     try {
         await dbConnect();
@@ -34,21 +34,25 @@ handler.get(async (req, res) => {
 handler.post(async (req, res) => {
     try {
         await dbConnect();
-        const { name, description, stars, link } = req.body;
+        const { name, description, stars, projectLink } = req.body;
 
         if (req.file) {
             var fileName = req.file.filename;
             var mimetype = req.file.mimetype.slice(-3);
         }
-        await ReviewSchema.validateAsync({ name, description, stars });
+        if (projectLink && projectLink.slice(0, 8) !== "https://") return res.send({ success: false, message: "اكتب رابط بصيغة صحيحة" })
+        await reviewSchema.validateAsync({ name, description, stars, mimetype });
+
         await new Review({
             name,
             description,
             stars,
-            link,
+            projectLink,
             cover: fileName,
+            date: dayjs().format("MMM D, YYYY"),
+            analysis_date: dayjs().format("M/YYYY"),
         }).save()
-        res.send({ success: true })
+        res.send({ success: true, message: "تم نشر تجربتك بنجاح" })
     } catch (err) {
         console.log(err);
         if (!err.isJoi) return res.send({ success: false, message: err.message })

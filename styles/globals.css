@@ -9,21 +9,36 @@ body {
 
 * {
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 a {
   color: inherit;
   text-decoration: none;
 }
-
-header li {
-  transition: transform .18s ease, border .18s ease-in-out;
+header {
+  transition: height .2s ease;
 }
-
+header li {
+  transition: transform .18s ease;
+}
+.menu-line-2 {
+  transition: opacity .5s ease;
+}
+.menu-line-1 {
+  transition: bottom .4s ease;
+}
+.menu-line-2 {
+  transition: top .4s ease;
+}
+.menu-line-1, .menu-line-3 {
+  transition: transform .2s ease;
+}
 textarea::selection {
   background: #0E185F;
   color: #F9FAFE;
 }
+
 .ar {
   direction: rtl;
 }
@@ -32,30 +47,46 @@ textarea::selection {
   direction: ltr;
 }
 
-.generated-circle {
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  transition: width .1s linear, height .1s linear;
-  opacity: .3;
-  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-  animation: circle 1.1s ease-in-out infinite;
-  background: linear-gradient(102.92deg, #B388EB 28.41%, #FFC623 103.31%);
+#__next {
+  scroll-behavior: smooth
 }
-
-.pop-up {
-  animation: pop-up .5s ease-in-out;
-
-}
-
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer components {
+  * {
+    @apply tracking-tight
+  }
+  .menu-line {
+    @apply
+    w-[100%]
+    h-[4px]
+    bg-[#0070f3]
+    rounded-md
+  }
+  
+  .menu-line-1,
+  .menu-line-3 {
+    @apply absolute
+  }
   .section-styling {
     @apply w-[100%] h-[100vh] bg-white_color
+  }
+
+  .title {
+    @apply w-fit font-bold sm:text-[1.85rem] md:text-[2rem] lg:text-[2.2rem] text-blue_color mx-auto
+  }
+
+  .dash {
+    @apply w-6 h-2 bg-green-500 rounded-md
+  }
+  form {
+    @apply md:w-[93%] lg:w-[88%] mx-auto ar
+  }
+  form div {
+    margin-top: 2em
   }
 
   form label {

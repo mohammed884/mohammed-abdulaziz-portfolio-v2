@@ -1,4 +1,5 @@
 import Layout from '../components/Layout';
+import Head from "next/head"
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -13,7 +14,12 @@ function MyApp({ Component, pageProps }) {
     });
   }, []);
   return (
-      <Component {...pageProps} />
+    <>
+    {/* <Head>
+    <title>Mohammed Abdulaziz</title>
+    </Head> */}
+    <Component {...pageProps} />
+    </>
   )
 }
 
