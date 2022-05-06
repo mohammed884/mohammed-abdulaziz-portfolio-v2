@@ -11,9 +11,9 @@ export default function Home({ homeRef }) {
         </div>
 
         <div className="ar">
-          <span className=" sm:text-[1.7rem] lg:text-[2.1rem] xl:text-[2.2rem] text-blue_color font-bold">
+          <h1 className=" sm:text-[1.7rem] lg:text-[2.1rem] xl:text-[2.2rem] text-blue_color font-bold">
             محمد عبدالعزيز مبرمج و مصمم مواقع
-          </span>
+          </h1>
           <p className="sm:w-[320px] md:w-[380px] lg:w-[450px] xl:w-[500px] text-[#040C2D] sm:text-[1.1rem] xl:text-[1.3rem] mt-1">اساعد الاشخاص و الشركات في العمل على فكرة موقعهم و تحسينها و وضع خطة كاملة للمشروع   </p>
           {/* <FontAwesomeIcon className="sm:text-[1.3rem] text-blue_color mt-8" icon={faArrowDown} style={{fontSize:"1.3rem"}}/> */}
         </div>

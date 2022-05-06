@@ -3,9 +3,10 @@ import Image from "next/image";
 import Carousel from 'react-multi-carousel';
 import Link from "next/link"
 import 'react-multi-carousel/lib/styles.css';
+import axios from "axios"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-export default function Works({ reviews, average_rating }) {
+export default function Works({ reviews, average_rating, isAdmin }) {
     const [selectedProjectIndex, setSelectedProjectIndex] = useState(-1);
     const work = [
         {
@@ -60,9 +61,16 @@ export default function Works({ reviews, average_rating }) {
             slidesToSlide: 1 // optional, default to 1.
         }
     };
+    const deleteReview = async _id => {
+        if (!isAdmin) return;
+        const check = window.confirm('Are you sure you want to DELETE THIS?')
+        if (!check) return
+        const res = await axios.delete("/api/review", {headers:{reviewId:_id}});
+        console.log(res.data);
+    }
     return (
         <section className="w-[100%] sm:min-h-[120vh] md:min-h-[100vh] overflow-hidden">
-            <h1 data-aos="fade-down" className="title text-[1.5rem] mb-3">
+            <h1 data-aos="fade-down" className="title sm:text-[1.5rem] md:text-[2rem] lg:text-[2.2rem]  mb-3">
                 اقوم بعمل مواقع تتكلم عن نفسها
             </h1>
             <div className="sm:w-[92%] md:w-[80%] sm:min-h-[30vh] md:min-h-[50vh] grid grid-cols-2 gap-5 place-items-center mx-auto mt-8">
@@ -105,7 +113,7 @@ export default function Works({ reviews, average_rating }) {
                     <div data-aos="fade-left" className="w-2 sm:h-10 lg:h-12 rounded-md" style={{ background: "linear-gradient(129.85deg, #3B82F6 24.63%, #B388EB 65.62%)" }}></div>
 
                     <div className="w-[100%] flex items-center mr-3">
-                        <p className="flex font-bold sm:text-[1.8rem] md:text-[2rem] lg:text-[2.3rem]">الآراء</p>
+                        <h2 className="flex font-bold sm:text-[1.8rem] md:text-[2rem] lg:text-[2.3rem]">الآراء</h2>
                         <div className="flex items-center mr-5">
                             (<FontAwesomeIcon className="w-[16px] text-yellow_color" icon={faStar} />
                             <p className="md:text-[1rem] lg:text-[1.4rem] mr-[.2]">{average_rating}</p>)
@@ -115,15 +123,14 @@ export default function Works({ reviews, average_rating }) {
                 </div>
                 <Carousel className="mx-auto en p-3 mt-" autoPlay={true} responsive={responsive} infinite={true} arrows={true} keyBoardControl={true}>
                     {
-                        reviews.map(({ name, description, stars, cover, date }, i) =>
+                        reviews.map(({ name, description, stars, cover, date, _id }, i) =>
                             <div className="w-[100%] flex flex-col p-[.4em] relative ar" key={i}>
                                 <div className="w-1 h-[100%] absolute rounded-md left-0" style={{
                                     background: "linear-gradient(129.85deg, #3B82F6 24.63%, #B388EB 65.62%)"
                                 }}>
-
                                 </div>
-                                <div className="flex items-center" >
-                                    <Image src={`/uploads/${cover}`} width="37" height="37" alt={`${name}'s photo ${date}`} className="object-fit object-center" />
+                                <div className="flex items-center" onClick={() => deleteReview(_id)}>
+                                    <Image src={`/uploads/${cover}`} width="37" height="37" alt={`${name}'s photo ${date}`} className="rounded-[50%] object-fit object-center" />
                                     <span className="sm:text-[1.1rem] md:text-[1.25rem] text-black mr-2">{name}</span>
                                 </div>
                                 <label>
@@ -145,7 +152,7 @@ export default function Works({ reviews, average_rating }) {
                     }
                 </Carousel>
                 <ul>
-                    <li className="sm:w-[150px] md:w-[170px] h-[50px] flex items-center justify-center rounded-md text-[1rem] border-[3px] border-blue_color text-deep_blue hover:border-blue-600 font-bold mt-10">
+                    <li className="sm:w-[150px] md:w-[170px] h-[50px] flex items-center justify-center rounded-md text-[1rem] border-[3px] border-blue_color text-deep_blue hover:border-blue-600 font-bold mt-10 cursor-pointer">
                         <Link href="/review">اكتب تجربتك معي</Link>
                     </li>
                 </ul>

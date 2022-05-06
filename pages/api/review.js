@@ -5,6 +5,8 @@ import nc from "next-connect";
 import { nanoid } from 'nanoid';
 import reviewSchema from "../../validation/review";
 import dayjs from "dayjs";
+import isAdmin from "../../middleware/isAdmin";
+import fs from "fs"
 const upload = multer({
     storage: multer.diskStorage({
         destination: './public/uploads',
@@ -20,9 +22,10 @@ const handler = nc({
         res.status(404).end("Page is not found");
     },
 })
-handler.use(upload.single("cover"));
+
 handler.get(async (req, res) => {
     try {
+        //SEND ALL REVIEWS
         await dbConnect();
         const reviews = await Review.find();
         res.send(reviews);
@@ -31,18 +34,21 @@ handler.get(async (req, res) => {
         res.send("error")
     }
 })
-handler.post(async (req, res) => {
+handler.post(upload.single("cover"), async (req, res) => {
     try {
-        await dbConnect();
+        //STRUCTURE AND VALIDATE DATA
         const { name, description, stars, projectLink } = req.body;
-
         if (req.file) {
             var fileName = req.file.filename;
-            var mimetype = req.file.mimetype.slice(-3);
+            var mimetype = req.file.mimetype;
         }
         if (projectLink && projectLink.slice(0, 8) !== "https://") return res.send({ success: false, message: "اكتب رابط بصيغة صحيحة" })
         await reviewSchema.validateAsync({ name, description, stars, mimetype });
 
+        //CONNECT TO DB 
+        await dbConnect();
+
+        //CREATE THE REVIEW
         await new Review({
             name,
             description,
@@ -54,16 +60,23 @@ handler.post(async (req, res) => {
         }).save()
         res.send({ success: true, message: "تم نشر تجربتك بنجاح" })
     } catch (err) {
-        console.log(err);
+        //REMOVE UPLOADED FILE
+        if (fileName) {
+            fs.unlinkSync(`./public/uploads/${fileName}`)
+        }
         if (!err.isJoi) return res.send({ success: false, message: err.message })
         const message = err.details[0].message.replace(/"/g, "");
         res.send({ success: false, message })
 
     }
+});
+handler.delete(isAdmin, async (req, res) => {
+    const _id = req.headers.reviewid;
+    await Review.deleteOne({ _id });
 })
 export const config = {
     api: {
-        bodyParser: false, // Disallow body parsing, consume as stream
+        bodyParser: false, 
     },
 };
 export default handler;

@@ -1,6 +1,6 @@
 import nc from "next-connect";
 import {verify} from "jsonwebtoken";
-import isAdmin from "../../../middleware/isAdmin"
+import isAdmin from "../../middleware/isAdmin"
 const handler = nc({
     onError: (err, req, res, next) => {
         console.error(err.stack);
@@ -14,7 +14,8 @@ handler.get(isAdmin, async (req, res) => {
     try {
         res.send({success: true});
     } catch (err) {
-        
+        res.send({success: false});
+        console.log(err);
     }
 });
 

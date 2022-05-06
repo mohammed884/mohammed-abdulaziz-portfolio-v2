@@ -45,7 +45,7 @@ export default function Header({ isAdmin }) {
                 {
                     isAdmin &&
                     <li className="flex text-[#040C2D] sm:text-[1.1rem] md:text-[1.18rem] lg:text-[1.2rem] rounded-lg cursor-pointer hover:scale-[.92]">
-                        <Link href="/admin/">لوحة التحكم</Link>
+                        <Link href="/admin/">اضف عمل</Link>
                         {/* <FontAwesomeIcon className="w-5 ml-3 text-blue_color" icon={faEnvelope} /> */}
                     </li>
                 }

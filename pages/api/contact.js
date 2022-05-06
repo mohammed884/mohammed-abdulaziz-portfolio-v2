@@ -2,6 +2,8 @@ import nc from "next-connect";
 import contactSchema from "../../validation/contact";
 import PotentialClient from "../../models/potentialClient";
 import dayjs from "dayjs";
+
+//SETUP HANDLER
 const handler = nc({
     onError: (err, req, res, next) => {
         console.error(err.stack);
@@ -13,8 +15,11 @@ const handler = nc({
 });
 handler.post(async (req, res) => {
     try {
+        //STRUCTURE AND VALIDATE DATA
         const { name, email, description, socialLink, } = req.body;
         await contactSchema.validateAsync({ name, email, description, socialLink });
+
+        //CREATE A NEW Potential Client
         await new PotentialClient({
             name,
             email,
@@ -26,6 +31,7 @@ handler.post(async (req, res) => {
         res.send({success: true, message:"تم ارسال رسالتك بنجاح سوف اقوم بمراسلتك في اقرب وقت ممكن"})
     } catch (err) {
         console.log(err);
+        //CHECK FOR ERROS
         if (err.isJoi) {
             const message = err.details[0].message.replace(/"/g, "");
             res.send({ success: false, message });
@@ -33,7 +39,5 @@ handler.post(async (req, res) => {
     }
 
 });
-
-
 
 export default handler;

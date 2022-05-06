@@ -9,7 +9,6 @@ const isAdmin = (req, res, next) => {
             else {
                 if (decoded.username === ADMIN_NAME) isAdmin = true
                 else isAdmin = false
-
             }
         })
         if (!isAdmin) return res.send({ success: false, message: "Unauthorized" });
