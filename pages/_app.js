@@ -14,12 +14,9 @@ function MyApp({ Component, pageProps }) {
     });
   }, []);
   return (
-    <>
-    {/* <Head>
-    <title>Mohammed Abdulaziz</title>
-    </Head> */}
-    <Component {...pageProps} />
-    </>
+    // <Layout>
+      <Component {...pageProps} />
+    // </Layout>
   )
 }
 

@@ -1,16 +1,17 @@
 import React, { useState, useLayoutEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faStar } from '@fortawesome/free-solid-svg-icons';
-import Confetti from 'react-confetti';
 import axios from 'axios';
 import Link from "next/link"
+import Confetti from 'react-confetti';
+import Head from "next/head"
 export default function Review() {
     const [name, setName] = useState("");
     const [cover, setCover] = useState("");
     const [description, setDescription] = useState("");
-    const [stars, setStars] = useState(1);
+    const [stars, setStars] = useState(0);
     const [projectLink, setProjectLink] = useState("");
-    const [currentStar, setCurrentStar] = useState(1);
+    const [currentStar, setCurrentStar] = useState(-1);
     const [confettiWidth, setConfettiWidth] = useState(0);
     const [confettiHeight, setConfettiHeight] = useState(0);
     const [showConfetti, setShowConfetti] = useState(false);
@@ -51,6 +52,9 @@ export default function Review() {
 
     return (
         <section className="section-styling flex items-center justify-center">
+            <Head>
+                <title>صفحة كتابة التجربة</title>
+            </Head>
             {
                 showConfetti
                 &&

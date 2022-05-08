@@ -29,8 +29,8 @@ export default function WhyMe() {
             <div data-aos={`${i % 2 === 0 ? "fade-left" : "fade-right"}`} className={`flex items-center sm:flex-col sm:mt-8 md:mt-0 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`} key={i}>
               <Img width="210" height="210" src={`/svgs/${svg}`} alt={title} />
               <div className={`${i % 2 === 0 ? "md:ml-2" : " md:mr-2"} sm:mt-3 md:mt-0`}>
-                <h2 className="sm:text-[1.5rem] text-black font-bold">{title}</h2>
-                <p className="max-w-[500px] text-[#1a1a1ae0] sm:text-[1.1rem] md:text-[1.11rem] mt-2 leading-[1.61em]">{why}</p>
+                <h2 className="sm:text-[1.5rem] text-black_color font-bold">{title}</h2>
+                <p className="max-w-[500px] text-black_color sm:text-[1.1rem] md:text-[1.11rem] mt-2 leading-[1.61em]">{why}</p>
               </div>
             </div>
           )

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import Head from "next/head"
 export default function Login() {
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
@@ -16,15 +17,18 @@ export default function Login() {
     }
     return (
         <section>
+            <Head>
+                <title>سجل دخول</title>
+            </Head>
             <form className="en" onSubmit={handleSubmit}>
                 {
-                errMessage && 
+                    errMessage &&
                     <span>{errMessage}</span>
                 }
                 <label htmlFor="name">Name</label>
-                <input onChange={({target:{value}}) => setName(value)} type="text" id="name" />
+                <input onChange={({ target: { value } }) => setName(value)} type="text" id="name" />
                 <label htmlFor="password">Password</label>
-                <input onChange={({target:{value}}) => setPassword(value)} type="password" id="password" />
+                <input onChange={({ target: { value } }) => setPassword(value)} type="password" id="password" />
                 <button type="submit">Login</button>
             </form>
         </section>

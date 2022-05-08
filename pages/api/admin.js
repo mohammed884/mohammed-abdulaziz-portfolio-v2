@@ -1,5 +1,4 @@
 import nc from "next-connect";
-import {verify} from "jsonwebtoken";
 import isAdmin from "../../middleware/isAdmin"
 const handler = nc({
     onError: (err, req, res, next) => {

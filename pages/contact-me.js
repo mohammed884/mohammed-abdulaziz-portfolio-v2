@@ -2,7 +2,8 @@ import React, { useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
-import Link from "next/link"
+import Link from "next/link";
+import Head from "next/head";
 export default function ContactMe() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -32,10 +33,13 @@ export default function ContactMe() {
     }
     return (
         <section className="section-styling flex items-center justify-center">
-         <div className="sm:w-[85%] md:w-[70%] lg:w-[55%] h-[70vh] relative">
+            <Head>
+                <title>تواصل معي</title>
+            </Head>
+            <div className="sm:w-[85%] md:w-[70%] lg:w-[55%] h-[70vh] relative">
                 <div className="w-[100%] flex items-center justify-between mx-auto">
                     <div data-aos="fade-right" onClick={() => window.history.back()} style={{ transition: "transform .2s ease" }} className="w-[50px] flex items-center cursor-pointer text-center hover:translate-x-[-.9rem]">
-                    <Link href="/">
+                        <Link href="/">
                             <FontAwesomeIcon className="sm:text-[1.3rem] md:text-[1.4rem] lg:text-[1.5rem] text-yellow_color cursor-pointer font-medium" icon={faArrowLeft} />
                         </Link>
                     </div>

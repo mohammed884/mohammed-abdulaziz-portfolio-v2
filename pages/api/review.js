@@ -1,13 +1,14 @@
 import Review from "../../models/review";
-import dbConnect from "../../utilities/dbConnect";
 import multer from "multer";
 import nc from "next-connect";
 import { nanoid } from 'nanoid';
 import reviewSchema from "../../validation/review";
 import dayjs from "dayjs";
 import isAdmin from "../../middleware/isAdmin";
+import database from "../../middleware/database"
 import fs from "fs"
 const upload = multer({
+    limits: { fileSize: 5242880  },
     storage: multer.diskStorage({
         destination: './public/uploads',
         filename: (req, file, cb) => cb(null, `${nanoid()}-${file.originalname}`),
@@ -22,11 +23,11 @@ const handler = nc({
         res.status(404).end("Page is not found");
     },
 })
+handler.use(database);
 
 handler.get(async (req, res) => {
     try {
         //SEND ALL REVIEWS
-        await dbConnect();
         const reviews = await Review.find();
         res.send(reviews);
     } catch (err) {
@@ -44,9 +45,6 @@ handler.post(upload.single("cover"), async (req, res) => {
         }
         if (projectLink && projectLink.slice(0, 8) !== "https://") return res.send({ success: false, message: "اكتب رابط بصيغة صحيحة" })
         await reviewSchema.validateAsync({ name, description, stars, mimetype });
-
-        //CONNECT TO DB 
-        await dbConnect();
 
         //CREATE THE REVIEW
         await new Review({
@@ -71,12 +69,13 @@ handler.post(upload.single("cover"), async (req, res) => {
     }
 });
 handler.delete(isAdmin, async (req, res) => {
-    const _id = req.headers.reviewid;
+    const _id = req.headers._id;
     await Review.deleteOne({ _id });
-})
+    res.send({ success: true })
+});
 export const config = {
     api: {
-        bodyParser: false, 
+        bodyParser: false,
     },
 };
 export default handler;
