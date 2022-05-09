@@ -1,7 +1,7 @@
 import { verify } from 'jsonwebtoken';
 const isAdmin = (req, res, next) => {
     try {
-        const token = req.cookies.token;
+        const token = req.cookies.token || req.headers.token;
         const { ADMIN_NAME, JWT_SECRET } = process.env;
         let isAdmin;
         verify(token, JWT_SECRET, (err, decoded) => {

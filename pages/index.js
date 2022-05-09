@@ -40,7 +40,7 @@ export default function Home({ reviews, average_rating, projects }) {
     </div>
   )
 }
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const { API_URL } = process.env
 
   const reviewsRes = await axios(`${API_URL}/review`);

@@ -7,14 +7,14 @@ const Schema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique:true,
+        unique: true,
     },
     project_description: {
-        type:String,
+        type: String,
         required: true
     },
-    socialLink:{
-        type:String,
+    socialLink: {
+        type: String,
         required: true
     },
     date: {
@@ -25,6 +25,14 @@ const Schema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    sendMessage: {
+        type: Boolean,
+        default: false,
+    },
+    deal:{
+        type:Boolean,
+        default: false,
+    }
 });
 const PotentialClient = mongoose.models.PotentialClient || new mongoose.model("PotentialClient", Schema);
 module.exports = PotentialClient
