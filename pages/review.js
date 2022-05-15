@@ -4,7 +4,8 @@ import { faArrowLeft, faStar } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import Link from "next/link"
 import Confetti from 'react-confetti';
-import Head from "next/head"
+import Head from "next/head";
+import Router from "next/router";
 export default function Review() {
     const [name, setName] = useState("");
     const [cover, setCover] = useState("");
@@ -63,9 +64,9 @@ export default function Review() {
                     height={confettiHeight}
                 />
             }
-            <div className="sm:w-[85%] md:w-[70%] lg:w-[55%] h-[70vh] relative">
+            <div className="sm:w-[85%] md:w-[70%] lg:w-[55%]  md:h-[70vh] relative">
                 <div className="w-[100%] flex items-center justify-between mx-auto">
-                    <div data-aos="fade-right" onClick={() => window.history.back()} style={{ transition: "transform .2s ease" }} className="w-[50px] flex items-center cursor-pointer text-center hover:translate-x-[-.9rem]">
+                    <div data-aos="fade-right" onClick={() => Router.back()} style={{ transition: "transform .2s ease" }} className="w-[50px] flex items-center cursor-pointer text-center hover:translate-x-[-.9rem]">
                         <Link href="/">
                             <FontAwesomeIcon className="sm:text-[1.3rem] md:text-[1.4rem] lg:text-[1.5rem] text-yellow_color cursor-pointer font-medium" icon={faArrowLeft} />
                         </Link>

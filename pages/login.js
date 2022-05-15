@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
-import Head from "next/head"
+import Head from "next/head";
+import Router from "next/router";
+
 export default function Login() {
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
@@ -12,7 +14,7 @@ export default function Login() {
             password,
         };
         const { data } = await axios.post("/api/login", info);
-        if (data.success) window.history.go("/")
+        if (data.success) Router.push("/")
         else setErrMessage(data.message);
     }
     return (

@@ -8,7 +8,7 @@ import isAdmin from "../../middleware/isAdmin";
 import database from "../../middleware/database"
 import fs from "fs"
 const upload = multer({
-    limits: { fileSize: 5242880  },
+    limits: { fileSize: 5242880 },
     storage: multer.diskStorage({
         destination: './public/uploads',
         filename: (req, file, cb) => cb(null, `${nanoid()}-${file.originalname}`),
@@ -28,7 +28,7 @@ handler.use(database);
 handler.get(async (req, res) => {
     try {
         //SEND ALL REVIEWS
-        const reviews = await Review.find();
+        const reviews = await Review.find().lean();
         res.send(reviews);
     } catch (err) {
         console.log(err);
@@ -69,9 +69,16 @@ handler.post(upload.single("cover"), async (req, res) => {
     }
 });
 handler.delete(isAdmin, async (req, res) => {
-    const _id = req.headers._id;
-    await Review.deleteOne({ _id });
-    res.send({ success: true })
+    try {
+        const _id = req.headers._id;
+        const review = await Review.findOne({ _id });
+        if (review.cover !== "default.png") fs.unlinkSync(`./public/uploads/${review.cover}`);
+        await review.delete()
+        res.send({ success: true })
+    } catch (err) {
+        console.log(err);
+        res.send({ success: false, message: err.message })
+    }
 });
 export const config = {
     api: {

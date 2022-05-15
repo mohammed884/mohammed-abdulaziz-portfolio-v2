@@ -25,7 +25,7 @@ const Schema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    sendMessage: {
+    answered: {
         type: Boolean,
         default: false,
     },
@@ -34,5 +34,5 @@ const Schema = new mongoose.Schema({
         default: false,
     }
 });
-const PotentialClient = mongoose.models.PotentialClient || new mongoose.model("PotentialClient", Schema);
-module.exports = PotentialClient
+const Client = mongoose.models.Client || new mongoose.model("Client", Schema);
+module.exports = Client

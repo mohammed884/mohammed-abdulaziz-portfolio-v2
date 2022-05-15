@@ -2,12 +2,20 @@ import { useState } from 'react'
 import Image from "next/image";
 import axios from "axios";
 import Head from "next/head";
+import Router from "next/router";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-export default function Work({ project: { arTitle, slider, description, date, duration, client, link } }) {
-  const [path, setPath] = useState("")
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import Header from "../../components/Header"
+export default function Work({ project: { arTitle, enTitle, slider, description, date, duration, client, link, _id }, isAdmin }) {
+  const [path, setPath] = useState("");
+  const handleDelete = async () => {
+    if (!isAdmin) return;
+    const { data } = await axios.delete("/api/project", { headers: { _id } });
+    if (data.success) Router.push("/")
+  };
   return (
-    <section className="section-styling min-h-[100vh]">
+    <section className="section-styling">
+      <Header isAdmin={isAdmin} />
       <Head>
         <title>{arTitle}</title>
       </Head>
@@ -33,21 +41,30 @@ export default function Work({ project: { arTitle, slider, description, date, du
             </div>
           </div>
           <div className="sm:w-[100%] xl:w-[80%] sm:mt-8 lg:mt-0">
-            <h1 data-aos="fade-left" className="sm:text-[1.8rem] md:text-[2.3rem] lg:text-[2.7rem] xl:text-[2.9rem] text-blue_color font-bold ml-auto">
-              {arTitle}
-              <div onClick={() => window.history.back()} className="sm:text-sm md:text-[1.15rem] text-yellow_color flex items-center cursor-pointer font-medium">
-                <span> عد </span>
-                <FontAwesomeIcon icon={faArrowLeft} className="mr-2"/>
-              </div>
-            </h1>
-            <textarea readOnly value={description} className="sm:w-[100%] xl:w-[100%] sm:h-[92%] lg:h-[80%] lg:text-[1.02rem] xl:text-[1.11rem] leading-8 bg-white_color outline-none resize-none">
+            <div data-aos="fade-down">
+              <h1 className="sm:text-[1.8rem] md:text-[2.3rem] lg:text-[2.7rem] xl:text-[2.9rem] text-blue_color font-bold">
+                {arTitle}
+              </h1>
+              <time className="sm:text-[.8rem] lg:text-[.9rem]">{date.published}</time>
+            </div>
+
+            <textarea readOnly value={description} className="sm:w-[100%] xl:w-[100%] sm:h-[92%] lg:h-[80%] lg:text-[1.02rem] xl:text-[1.11rem] leading-7 bg-white_color mt-5 outline-none resize-none">
             </textarea>
           </div>
         </div>
         <div className="w-[100%] p-[.3rem]">
           <div className="flex items-center">
             <div data-aos="fade-left" className="w-2 sm:h-10 lg:h-10 rounded-md" style={{ background: "linear-gradient(129.85deg, #3B82F6 24.63%, #B388EB 65.62%)" }}></div>
-            <h2 className="text-[1.3rem] mr-2">معلومات اضافية</h2>
+            <div className="inline-flex items-center">
+              <h2 className="text-[1.3rem] mr-2">معلومات اضافية</h2>
+              {
+                isAdmin &&
+                <div className="mr-4 text-[1.1rem]">
+                  <FontAwesomeIcon onClick={() => Router.push(`/project/edit/${enTitle}`)} className="text-blue_color cursor-pointer" icon={faEdit} />
+                  <FontAwesomeIcon onClick={handleDelete} className="text-red-500 mr-4 cursor-pointer" icon={faTrash} />
+                </div>
+              }
+            </div>
           </div>
           <div className="sm:w-[100%] xl:w-[50%] flex justify-between mt-5">
             <div>
@@ -75,20 +92,30 @@ export default function Work({ project: { arTitle, slider, description, date, du
     </section>
   )
 };
-export const getStaticPaths = async () => {
-  const { data } = await axios(`${process.env.API_URL}/project`);
-  const paths = data.projects.map(project => ({ params: { title: project.enTitle } }))
-  return {
-    paths,
-    fallback: true // false or 'blocking'
+// export const getStaticPaths = async () => {
+//   const { data } = await axios(`${process.env.API_URL}/project`);
+//   const paths = data.projects.map(project => ({ params: { title: project.enTitle } }))
+//   return {
+//     paths,
+//     fallback: true // false or 'blocking'
+//   };
+// }
+export const getServerSideProps = async (ctx) => {
+  const title = ctx.query.title;
+  const token = ctx.req.cookies.token || "";
+  const projectRes = await axios(`${process.env.API_URL}/project/single`, { headers: { title } });
+  const adminRes = await axios(`${process.env.API_URL}/admin`, { headers: { token } });
+  if (!projectRes.data.success) return {
+    redirect: {
+      permanent: false,
+      destination: "/",
+    },
+    props: {},
   };
-}
-export const getStaticProps = async (ctx) => {
-  const { title } = ctx.params;
-  const { data } = await axios(`${process.env.API_URL}/project/single`, { headers: { title } });
   return {
     props: {
-      project: data.project
+      project: projectRes.data.project,
+      isAdmin: adminRes.data.success
     }
   }
 }

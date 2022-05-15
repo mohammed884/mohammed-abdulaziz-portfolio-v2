@@ -1,6 +1,6 @@
 import nc from "next-connect";
 import contactSchema from "../../validation/contact";
-import PotentialClient from "../../models/potentialClient";
+import Client from "../../models/client";
 import dayjs from "dayjs";
 import database from "../../middleware/database"
 
@@ -23,7 +23,7 @@ handler.post(async (req, res) => {
         await contactSchema.validateAsync({ name, email, description, socialLink, });
 
         //CREATE A NEW Potential Client
-        await new PotentialClient({
+        await new Client({
             name,
             email,
             project_description: description,

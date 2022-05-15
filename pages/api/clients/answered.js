@@ -1,7 +1,7 @@
 import nc from 'next-connect';
-import database from "../../middleware/database";
-import isAdmin from "../../middleware/isAdmin";
-import PotentialClient from "../../models/potentialClient"
+import database from "../../../middleware/database";
+import isAdmin from "../../../middleware/isAdmin";
+import Client from "../../../models/client"
 const handler = nc({
     onError: (err, req, res, next) => {
         console.error(err.stack);
@@ -14,8 +14,8 @@ const handler = nc({
 handler.use(database);
 handler.get(isAdmin, async (req, res) => {
     try {
-        const potentialClients = await PotentialClient.find({});
-        res.send({ success: true, potentialClients });
+        const clients = await Client.find({answered:true});
+        res.send({ success: true, clients });
     } catch (err) {
         res.send({ success: false, message:err.message });
         console.log(err);

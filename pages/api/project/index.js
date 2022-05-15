@@ -27,18 +27,18 @@ const handler = nc({
 handler.use(database)
 handler.get(async (req, res) => {
     try {
-        const projects = await Project.find({});
+        const projects = await Project.find().lean();
         res.send({ success: true, projects });
     } catch (err) {
         console.log(err);
         res.send({ success: false, message: err.message });
     }
 });
-
-handler.post(isAdmin, upload.array("slider", 5), async (req, res) => {
+handler.use(isAdmin)
+handler.post(upload.array("slider", 5), async (req, res) => {
     try {
         //STRUCTURE AND VALIDATE DATA
-        const { arTitle,enTitle, description, link, client, duration, yearOfCreation } = req.body;
+        const { arTitle, enTitle, description, link, client, duration, yearOfCreation } = req.body;
         const mimetypes = ["image/png", "image/jpeg", "image/jpg"];
         var fileNames = req.files.map(img => {
             if (!mimetypes.includes(img.mimetype)) return res.send({ success: false, message: "حمل الصور بصيغة صحيحة" });
@@ -72,6 +72,18 @@ handler.post(isAdmin, upload.array("slider", 5), async (req, res) => {
         res.send({ success: false, message })
     }
 });
+handler.delete(async (req, res) => {
+    try {
+        const { _id } = req.headers;
+        const project = await Project.findOne({ _id});
+        project.slider.forEach(img => fs.unlinkSync(`./public/uploads/${img}`))
+        await project.delete()
+        res.send({ success: true })
+    } catch (err) {
+        console.log(err);
+        res.send({ success: false, message: err.message })
+    }
+})
 export const config = {
     api: {
         bodyParser: false,

@@ -42,7 +42,6 @@ export default function Home({ reviews, average_rating, projects }) {
 }
 export const getStaticProps = async () => {
   const { API_URL } = process.env
-
   const reviewsRes = await axios(`${API_URL}/review`);
   const reviews = reviewsRes.data;
   const totalReviews = reviewsRes.data.reduce((total, current) => total + current.stars, 0)

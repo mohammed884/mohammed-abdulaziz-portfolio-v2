@@ -4,8 +4,7 @@ import { faArrowLeft, } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import Link from "next/link";
 import Head from "next/head"
-import Router from 'next/router';
-export default function AddProject() {
+export default function EditProject() {
     const [arTitle, setArTitle] = useState("");
     const [enTitle, setEnTitle] = useState("");
     const [slider, setSlider] = useState([]);
@@ -37,7 +36,7 @@ export default function AddProject() {
         if (data.success) {
             setSuccessMessage(data.message);
             setErrorMessage("")
-            setTimeout(() => Router.push(`/project/${enTitle}`), 400)
+            setTimeout(() => window.history.back(), 400)
         } else {
             setErrorMessage(data.message)
             setSuccessMessage("")
@@ -47,7 +46,7 @@ export default function AddProject() {
     return (
         <section className="section-styling flex items-center justify-center">
             <Head>
-                <title>اضافة مشروع</title>
+                <title>التعديل على {arTitle}</title>
             </Head>
             <div className="sm:w-[85%] md:w-[70%] lg:w-[55%] relative">
                 <div className="w-[100%] flex items-center justify-between mx-auto">
@@ -56,7 +55,7 @@ export default function AddProject() {
                             <FontAwesomeIcon className="sm:text-[1.3rem] md:text-[1.4rem] lg:text-[1.5rem] text-yellow_color cursor-pointer font-medium" icon={faArrowLeft} />
                         </Link>
                     </div>
-                    <h1 data-aos="zoom-out" className="sm:text-[1.9rem] md:text-[2.1rem] lg:text-[2.15rem] text-blue_color font-bold">اضف مشروع</h1>
+                    <h1 data-aos="zoom-out" className="sm:text-[1.9rem] md:text-[2.1rem] lg:text-[2.15rem] text-blue_color font-bold">تعديل {arTitle}</h1>
                 </div>
                 <form className="sm:w-[92%] md:w-[90%] mt-8" onSubmit={handleSubmit} encType="multipart/form-data">
                     {
@@ -153,4 +152,7 @@ export default function AddProject() {
             </div>
         </section>
     )
+};
+export const getServerSideProps = async (ctx) => {
+    
 }
