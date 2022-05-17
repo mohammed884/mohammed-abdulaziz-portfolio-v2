@@ -24,7 +24,7 @@ export default function Answered({ clients }) {
                                     <ClientList client={client} />
                                 )
                                 :
-                                <h2 className="text-[1.3rem] opacity-90 ml-auto mt-3 ">لا توجد رسائل</h2>
+                                <h2 className="text-[1.3rem] opacity-90 ml-auto mt-3 ">لا يوجد عملاء تم مراسلتهم</h2>
                         }
                     </div>
                 </div>

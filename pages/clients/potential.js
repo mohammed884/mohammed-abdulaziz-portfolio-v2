@@ -4,8 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, } from '@fortawesome/free-solid-svg-icons';
 import Router from "next/router";
 import ClientList from "../../components/clientList";
-
+import { useQueries, QueryClient, dehydrate } from "react-query";
+import { getPotentialClients, getRole, } from "../../actions/actions"
 export default function PotentialClients({ clients }) {
+    const data = useQueries([
+        { queryKey: ['potential-clients', 1], queryFn: getPotentialClients },
+        { queryKey: ['role', 2], queryFn: getRole },
+    ], {
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+    })
+    console.log(data);
     return (
         <section className="section-styling flex items-center">
             <Head>
@@ -19,12 +28,12 @@ export default function PotentialClients({ clients }) {
                 <div className="w-[90%] min-h-[80%] grid grid-cols-1 mx-auto">
                     {
                         clients.length > 0
-                        ?
-                        clients.map(client =>
-                            <ClientList client={client}/>
-                        )
-                        :
-                        <h2 className="text-[1.3rem] opacity-90 ml-auto mt-3 ">لا توجد رسائل</h2>
+                            ?
+                            clients.map(client =>
+                                <ClientList client={client} />
+                            )
+                            :
+                            <h2 className="text-[1.3rem] opacity-90 ml-auto mt-3 ">لا توجد رسائل</h2>
                     }
                 </div>
             </div>
@@ -32,11 +41,14 @@ export default function PotentialClients({ clients }) {
     )
 };
 
-export const getServerSideProps = async (ctx) => {
-    const { data } = await axios(`${process.env.API_URL}/clients/potential`, { headers: { token: ctx.req.cookies.token } });
+export const getServerSideProps = async ctx => {
+    const token = ctx.req.cookies.token
+    const queryClient = new QueryClient();
+    await queryClient.prefetchQuery("potential-clients", getPotentialClients);
+    await queryClient.prefetchQuery("role", token, getRole);
     return {
         props: {
-            clients:data.clients
+            dehydratedState: dehydrate(queryClient)
         }
     }
 }

@@ -39,7 +39,7 @@ export default function WhyMe() {
           <h3 className="text-[2.5rem] text-blue_color font-bold mb-5">مهتم؟</h3>
           <ul>
             <li className="text-[1.35rem] text-deep_blue list-none hover:underline">
-              <a href="/contact-me">يمكنك مراسلتني من هنا</a>
+              <Link href="/contact-me">يمكنك مراسلتني من هنا</Link>
             </li>
           </ul>
         </div>

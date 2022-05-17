@@ -12,7 +12,8 @@ const handler = nc({
     },
 });
 handler.use(database);
-handler.get(isAdmin, async (req, res) => {
+handler.use(isAdmin);
+handler.get(async (req, res) => {
     try {
         const clients = await Client.find({ answered: false });
         res.send({ success: true, clients });
@@ -21,10 +22,9 @@ handler.get(isAdmin, async (req, res) => {
         console.log(err);
     }
 });
-handler.put(isAdmin, async (req, res) => {
+handler.put(async (req, res) => {
     try {
         const _id = req.body._id;
-        console.log(_id);
         await Client.updateOne({ _id }, { $set: { "answered": true } });
         res.send({success: true})
     } catch (err) {
@@ -32,7 +32,7 @@ handler.put(isAdmin, async (req, res) => {
         res.send({ success: false, message: err.message })
     }
 });
-handler.delete(isAdmin, async (req, res) => {
+handler.delete(async (req, res) => {
     try {
         const _id = req.headers._id;
         await Client.deleteOne({ _id });

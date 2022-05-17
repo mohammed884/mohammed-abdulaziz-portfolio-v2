@@ -60,7 +60,11 @@ export default function Header({ isAdmin }) {
                                         router.pathname === "/"
                                             ? href
                                             :
-                                            `/${href}`}>
+                                            href[0] !== "/"
+                                                ?
+                                                `/${href}`
+                                                :
+                                                `${href}`}>
                                         {title}
                                     </Link>
                                 </div>

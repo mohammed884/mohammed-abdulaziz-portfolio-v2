@@ -6,7 +6,7 @@ import 'react-multi-carousel/lib/styles.css';
 import axios from "axios"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-export default function Works({ reviews, average_rating, isAdmin, projects }) {
+export default function Works({ reviews, averageRating, isAdmin, projects }) {
     const [selectedProjectIndex, setSelectedProjectIndex] = useState(-1);
     const responsive = {
         desktop: {
@@ -79,7 +79,7 @@ export default function Works({ reviews, average_rating, isAdmin, projects }) {
                         <h2 className="flex font-bold text-black_color sm:text-[1.8rem] md:text-[2rem] lg:text-[2.3rem]">الآراء</h2>
                         <div className="flex items-center mr-5">
                             (<FontAwesomeIcon className="w-[16px] text-yellow_color" icon={faStar} />
-                            <p className="md:text-[1rem] lg:text-[1.4rem] mr-[.2]">{average_rating}</p>)
+                            <p className="md:text-[1rem] lg:text-[1.4rem] mr-[.2em]">{averageRating}</p>)
                         </div>
                     </div>
 

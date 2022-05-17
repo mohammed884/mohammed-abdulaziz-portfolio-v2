@@ -92,18 +92,11 @@ export default function Work({ project: { arTitle, enTitle, slider, description,
     </section>
   )
 };
-// export const getStaticPaths = async () => {
-//   const { data } = await axios(`${process.env.API_URL}/project`);
-//   const paths = data.projects.map(project => ({ params: { title: project.enTitle } }))
-//   return {
-//     paths,
-//     fallback: true // false or 'blocking'
-//   };
-// }
+
 export const getServerSideProps = async (ctx) => {
   const title = ctx.query.title;
   const token = ctx.req.cookies.token || "";
-  const projectRes = await axios(`${process.env.API_URL}/project/single`, { headers: { title } });
+  const projectRes = await axios(`${process.env.API_URL}/project/details`, { headers: { title } });
   const adminRes = await axios(`${process.env.API_URL}/admin`, { headers: { token } });
   if (!projectRes.data.success) return {
     redirect: {
