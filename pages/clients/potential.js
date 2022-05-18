@@ -2,19 +2,21 @@ import axios from "axios"
 import Head from "next/head";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, } from '@fortawesome/free-solid-svg-icons';
-import Router from "next/router";
+import {useRouter} from "next/router";
 import ClientList from "../../components/clientList";
 import { useQueries, QueryClient, dehydrate } from "react-query";
 import { getPotentialClients, getRole, } from "../../actions/actions"
-export default function PotentialClients({ clients }) {
-    const data = useQueries([
-        { queryKey: ['potential-clients', 1], queryFn: getPotentialClients },
-        { queryKey: ['role', 2], queryFn: getRole },
+export default function PotentialClients({ token }) {
+    const router = useRouter()
+    const results = useQueries([
+        { queryKey: ['potential-clients'], queryFn: getPotentialClients },
+        { queryKey: ['role', token], queryFn: getRole },
     ], {
         refetchOnMount: false,
         refetchOnWindowFocus: false,
     })
-    console.log(data);
+    if (!results[1].data) router.push("/");
+    const clients = results[0].data.clients
     return (
         <section className="section-styling flex items-center">
             <Head>
@@ -42,13 +44,14 @@ export default function PotentialClients({ clients }) {
 };
 
 export const getServerSideProps = async ctx => {
-    const token = ctx.req.cookies.token
+    const token = ctx.req.cookies.token || ""
     const queryClient = new QueryClient();
     await queryClient.prefetchQuery("potential-clients", getPotentialClients);
-    await queryClient.prefetchQuery("role", token, getRole);
+    await queryClient.prefetchQuery("role", token, async () => await getRole(token));
     return {
         props: {
-            dehydratedState: dehydrate(queryClient)
+            dehydratedState: dehydrate(queryClient),
+            token
         }
     }
 }

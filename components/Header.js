@@ -21,7 +21,7 @@ export default function Header({ isAdmin }) {
                         menu-line menu-line-3 ${isOpen ? "rotate-[-46deg] bg-red-500" : "absolute top-[22px] rotate-0"}
                     `}></div>
                 </div>
-                <img src="/images/work-template.png" className="w-[25px] h-[25px]" alt="test" />
+                {/* <img src="/images/work-template.png" className="w-[25px] h-[25px]" alt="test" /> */}
             </div>
             <nav className="w-[100%]">
                 <ul className={`

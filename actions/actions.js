@@ -18,7 +18,18 @@ export const getReviews = async () => {
 export const getRole = async token => {
     const url = `${NEXT_PUBLIC_API_URL}/admin`
     const { data } = await axios(url, { headers: { token } });
-    return data
+    return data.success
+};
+export const getIsAdminRedirect = async token => {
+    const url = `${NEXT_PUBLIC_API_URL}/admin`
+    const { data } = await axios(url, { headers: { token } });
+    if (!data.success) return {
+        redirect: {
+            permanent: false,
+            destination: "/",
+        },
+        props: {},
+    }
 }
 export const getAnsweredClients = async () => {
     const url = `${NEXT_PUBLIC_API_URL}/clients/answered`

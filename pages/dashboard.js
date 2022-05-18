@@ -1,12 +1,9 @@
-import axios from 'axios'
 import Link from 'next/link'
 import React from 'react'
 import { adminLinks as links } from "../utilities/links";
-import Router from "next/router";
 import Header from "../components/Header";
 import { getRole } from "../actions/actions"
-import { useQuery, QueryClient, dehydrate } from "react-query"
-export default function Dashboard({ isAdmin }) {
+export default function Dashboard() {
     return (
         <>
             <Header />
@@ -25,19 +22,14 @@ export default function Dashboard({ isAdmin }) {
     )
 };
 export const getServerSideProps = async ctx => {
-    const token = ctx.req.cookies.token
-    const queryClient = new QueryClient();
-    await queryClient.prefetchQuery(["role", token], async () => await getRole(token));
-    // return {
-    //     redirect: {
-    //       permanent: false,
-    //       destination: "/"
-    //     }
-    //   }
-    // }
-    return {
-        props: {
-            dehydratedState: dehydrate(queryClient)
-        }
+    const token = ctx.req.cookies.token || "";
+    const isAdmin = await getRole(token)
+    if (!isAdmin) return {
+        redirect: {
+            permanent: false,
+            destination: "/",
+        },
+        props: {},
     }
+    return { props: {} }
 }

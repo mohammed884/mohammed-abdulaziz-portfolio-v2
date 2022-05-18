@@ -1,12 +1,11 @@
-import { useRef, useEffect, useState } from "react";
-import axios from 'axios'
+import { useRef } from "react";
 import Header from '../components/Header.js';
 import HomePage from "../components/HomePage.js";
 import Projects from "../components/Projects.js";
 import Slider from "../components/Slider";
 import WhyMe from "../components/WhyMe.js";
 import Head from "next/head";
-import { dehydrate, useQuery, useQueries, QueryClient } from "react-query";
+import { dehydrate, useQueries, QueryClient } from "react-query";
 import { getProjects, getReviews, getRole } from "../actions/actions.js";
 export default function Home({ token }) {
   const mainRef = useRef(null);
@@ -23,7 +22,7 @@ export default function Home({ token }) {
   });
   const reviews = results[0].data;
   const projects = results[1].data.projects
-  const success = results[2].data.success
+  const success = results[2].data
   const isAdmin = success;
   const totalReviews = reviews.reduce((total, current) => total + current.stars, 0)
   const averageRating = totalReviews > 0 ? (totalReviews / reviews.length).toString().slice(0, 3) : 0;
@@ -45,7 +44,7 @@ export default function Home({ token }) {
   )
 }
 export const getServerSideProps = async ctx => {
-  const token = ctx.req.cookies.token
+  const token = ctx.req.cookies.token || ""
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery("reviews", getReviews);
   await queryClient.prefetchQuery("projects", getProjects);

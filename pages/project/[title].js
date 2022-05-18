@@ -2,12 +2,25 @@ import { useState } from 'react'
 import Image from "next/image";
 import axios from "axios";
 import Head from "next/head";
+import Header from "../../components/Header";
 import Router from "next/router";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import Header from "../../components/Header"
-export default function Work({ project: { arTitle, enTitle, slider, description, date, duration, client, link, _id }, isAdmin }) {
+import { useQueries, QueryClient, dehydrate } from 'react-query';
+import { getRole, getProjectDetails } from '../../actions/actions';
+export default function Work({token}) {
   const [path, setPath] = useState("");
+  const router = Router.useRouter();
+  const results = useQueries([
+    { queryKey:["project-details", router.query.title], queryFn:getProjectDetails},
+    { queryKey:["role", token], queryFn:getRole},
+  ], {
+    refetchOnMount: false,
+    refetchOnWindowFocus: false
+  });
+  if (!results[0].data.success) return Router.back();
+  const {arTitle, enTitle, slider, description, date, duration, client, link, _id} = results[0].data.project
+  const isAdmin = results[1].data
   const handleDelete = async () => {
     if (!isAdmin) return;
     const { data } = await axios.delete("/api/project", { headers: { _id } });
@@ -96,19 +109,13 @@ export default function Work({ project: { arTitle, enTitle, slider, description,
 export const getServerSideProps = async (ctx) => {
   const title = ctx.query.title;
   const token = ctx.req.cookies.token || "";
-  const projectRes = await axios(`${process.env.API_URL}/project/details`, { headers: { title } });
-  const adminRes = await axios(`${process.env.API_URL}/admin`, { headers: { token } });
-  if (!projectRes.data.success) return {
-    redirect: {
-      permanent: false,
-      destination: "/",
-    },
-    props: {},
-  };
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(["project-details", title], async () => await getProjectDetails(title))
+  await queryClient.prefetchQuery(["role", token], async () => await getRole(token))
   return {
     props: {
-      project: projectRes.data.project,
-      isAdmin: adminRes.data.success
+      dehydratedState: dehydrate(queryClient),
+      token,
     }
   }
 }

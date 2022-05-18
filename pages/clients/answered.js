@@ -4,7 +4,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, } from '@fortawesome/free-solid-svg-icons';
 import Router from "next/router";
 import ClientList from "../../components/clientList";
-export default function Answered({ clients }) {
+import { getAnsweredClients, getRole } from "../../actions/actions";
+import { dehydrate, QueryClient, useQueries } from "react-query";
+export default function Answered({ clients, token }) {
+    const results = useQueries([
+        { queryKey: ['answered-clients'], queryFn: getAnsweredClients },
+        { queryKey: ['role', token], queryFn: getRole },
+    ], {
+        refetchOnMount: false,
+        refetchOnWindowFocus: false,
+    })
+    if (!results[1].data) Router.back();
+const clients = results[1].data.clients
     return (
         <>
             <Head>
@@ -33,10 +44,13 @@ export default function Answered({ clients }) {
     )
 }
 export const getServerSideProps = async (ctx) => {
-    const { data } = await axios(`${process.env.API_URL}/clients/answered`, { headers: { token: ctx.req.cookies.token } });
+    const token = ctx.req.cookies.token || "";
+    const queryClient = new QueryClient();
+    await queryClient.prefetchQuery("answered-clients", getAnsweredClients)
     return {
         props: {
-            clients: data.clients
+            dehydratedState: dehydrate(queryClient),
+            token
         }
     }
 }

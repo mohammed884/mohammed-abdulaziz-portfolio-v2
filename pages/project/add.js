@@ -1,10 +1,12 @@
 import React, { useState, useLayoutEffect, useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
 import Link from "next/link";
 import Head from "next/head"
 import Router from 'next/router';
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, } from '@fortawesome/free-solid-svg-icons';
+import { getRole, } from '../../actions/actions';
+
 export default function AddProject() {
     const [arTitle, setArTitle] = useState("");
     const [enTitle, setEnTitle] = useState("");
@@ -153,4 +155,16 @@ export default function AddProject() {
             </div>
         </section>
     )
+}
+export const getServerSideProps = async (ctx) => {
+    const token = ctx.req.cookies.token || ""
+    const isAdmin = await getRole(token)
+    if (!isAdmin) return {
+        redirect: {
+            permanent: false,
+            destination: "/",
+        },
+        props: {},
+    }
+    return { props: {} }
 }
