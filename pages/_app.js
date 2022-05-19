@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient.current}>
       <Hydrate state={pageProps.dehydratedState}>
-        <ReactQueryDevtools initialIsOpen={false} />
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         <Component {...pageProps} />
       </Hydrate>
     </QueryClientProvider>

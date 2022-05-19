@@ -1,9 +1,9 @@
-import React, { useState, useLayoutEffect, useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, } from '@fortawesome/free-solid-svg-icons';
+import { useState, useLayoutEffect, useRef } from 'react';
 import axios from 'axios';
 import Link from "next/link";
 import Head from "next/head";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, } from '@fortawesome/free-solid-svg-icons';
 import { getRole, } from '../../actions/actions';
 export default function EditProject() {
     const [arTitle, setArTitle] = useState("");

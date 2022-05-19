@@ -1,22 +1,18 @@
-import axios from "axios"
 import Head from "next/head";
+import ClientList from "../../components/clientList";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useQuery, QueryClient, dehydrate } from "react-query";
+import { getPotentialClients, } from "../../actions/actions"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, } from '@fortawesome/free-solid-svg-icons';
-import {useRouter} from "next/router";
-import ClientList from "../../components/clientList";
-import { useQueries, QueryClient, dehydrate } from "react-query";
-import { getPotentialClients, getRole, } from "../../actions/actions"
 export default function PotentialClients({ token }) {
     const router = useRouter()
-    const results = useQueries([
-        { queryKey: ['potential-clients'], queryFn: getPotentialClients },
-        { queryKey: ['role', token], queryFn: getRole },
-    ], {
+    const {data} = useQuery(["potential-clients", token], getPotentialClients, {
         refetchOnMount: false,
         refetchOnWindowFocus: false,
-    })
-    if (!results[1].data) router.push("/");
-    const clients = results[0].data.clients
+    });
+    useEffect(() => { if (!data.success) router.back() }, []);
     return (
         <section className="section-styling flex items-center">
             <Head>
@@ -24,14 +20,14 @@ export default function PotentialClients({ token }) {
             </Head>
             <div className="sm:w-[92%] md:w-[80%] lg:w-[70%] mx-auto ">
                 <div className="w-[90%] mt-8 flex justify-between items-center mx-auto">
-                    <FontAwesomeIcon onClick={() => Router.back()} icon={faArrowLeft} className="text-yellow_color text-[1.2rem] cursor-pointer" />
+                    <FontAwesomeIcon onClick={() => router.back()} icon={faArrowLeft} className="text-yellow_color text-[1.2rem] cursor-pointer" />
                     <h1 className="sm:text-[1.59rem] md:text-[1.8rem] lg:text-[1.9rem] text-blue_color font-bold">العملاء المحتملين</h1>
                 </div>
                 <div className="w-[90%] min-h-[80%] grid grid-cols-1 mx-auto">
                     {
-                        clients.length > 0
+                        data.clients?.length > 0
                             ?
-                            clients.map(client =>
+                            data.clients.map(client =>
                                 <ClientList client={client} />
                             )
                             :
@@ -44,10 +40,9 @@ export default function PotentialClients({ token }) {
 };
 
 export const getServerSideProps = async ctx => {
-    const token = ctx.req.cookies.token || ""
+    const token = ctx.req.cookies.token || "";
     const queryClient = new QueryClient();
-    await queryClient.prefetchQuery("potential-clients", getPotentialClients);
-    await queryClient.prefetchQuery("role", token, async () => await getRole(token));
+    await queryClient.prefetchQuery(["potential-clients", token], async () => await getPotentialClients(token));
     return {
         props: {
             dehydratedState: dehydrate(queryClient),

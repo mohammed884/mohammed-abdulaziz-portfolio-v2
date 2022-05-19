@@ -60,7 +60,7 @@ export default function Works({ reviews, averageRating, isAdmin, projects }) {
                                     top-0 
                                     z-30
                                     ${selectedProjectIndex === i ? "opacity-100" : "opacity-0"} `}>
-                                    <span className="hover:underline text-purple-500 font-medium">
+                                    <span className="hover:underline text-black_color font-medium">
                                         {arTitle}
                                     </span>
                                 </div>

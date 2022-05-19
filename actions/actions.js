@@ -16,28 +16,21 @@ export const getReviews = async () => {
     return data
 }
 export const getRole = async token => {
+    if (token === "") false
     const url = `${NEXT_PUBLIC_API_URL}/admin`
     const { data } = await axios(url, { headers: { token } });
     return data.success
 };
-export const getIsAdminRedirect = async token => {
-    const url = `${NEXT_PUBLIC_API_URL}/admin`
-    const { data } = await axios(url, { headers: { token } });
-    if (!data.success) return {
-        redirect: {
-            permanent: false,
-            destination: "/",
-        },
-        props: {},
-    }
-}
-export const getAnsweredClients = async () => {
+
+export const getAnsweredClients = async token => {
+    if (token === "") return { success: false }
     const url = `${NEXT_PUBLIC_API_URL}/clients/answered`
-    const { data } = await axios(url);
+    const { data } = await axios(url, { headers: { token } });
     return data
 }
-export const getPotentialClients = async () => {
+export const getPotentialClients = async token => {
+    if (token === "") return { success: false }
     const url = `${NEXT_PUBLIC_API_URL}/clients/potential`
-    const { data } = await axios(url);
+    const { data } = await axios(url, { headers: { token } });
     return data
 }
