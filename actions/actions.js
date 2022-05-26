@@ -1,5 +1,5 @@
 import axios from "axios";
-const NEXT_PUBLIC_API_URL = "https://mohammed-abdulaziz.com"
+const {NEXT_PUBLIC_API_URL} = process.env
 export const getProjects = async () => {
     console.log(NEXT_PUBLIC_API_URL);
     const url = `${NEXT_PUBLIC_API_URL}/api/project`;
