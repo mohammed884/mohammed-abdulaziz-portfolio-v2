@@ -86,7 +86,7 @@ export default function Works({ reviews, averageRating, isAdmin, projects }) {
                 </div>
                 <Carousel className="mx-auto en p-3" autoPlay={true} responsive={responsive} infinite={true} arrows={true} removeArrowOnDeviceType={["tablet", "mobile"]} keyBoardControl={true}>
                     {
-                        reviews.map(({ name, description, stars, cover, date, _id }, i) =>
+                        reviews?.map(({ name, description, stars, cover, date, _id }, i) =>
                             <div className="w-[100%] flex flex-col p-[.4em] relative ar review mr-5" key={i}>
                                 <div className="w-1 h-[100%] absolute rounded-md left-0" style={{
                                     background: "linear-gradient(129.85deg, #3B82F6 24.63%, #B388EB 65.62%)"
