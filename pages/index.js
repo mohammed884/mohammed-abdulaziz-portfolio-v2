@@ -20,9 +20,9 @@ export default function Home({ token }) {
     refetchOnMount: false,
     refetchOnWindowFocus: false,
   });
-  const reviews = results[0] && results[0].data;
-  const projects = results[1] && results[1].data.projects
-  const success = results[2] && results[2].data
+  const reviews = results[0] ? results[0].data : []
+  const projects = results[1] ? results[1].data.projects : []
+  const success = results[2] ? results[2].data : []
   const isAdmin = success;
   const totalReviews = reviews.reduce((total, current) => total + current.stars, 0)
   const averageRating = totalReviews > 0 ? (totalReviews / reviews.length).toString().slice(0, 3) : 0;
