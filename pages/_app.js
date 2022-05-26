@@ -4,7 +4,6 @@ import { useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "../styles/globals.css";
-import { ReactQueryDevtools } from 'react-query/devtools'
 import {
   QueryClient,
   QueryClientProvider,
@@ -29,7 +28,6 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient.current}>
       <Hydrate state={pageProps.dehydratedState}>
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         <Component {...pageProps} />
       </Hydrate>
     </QueryClientProvider>

@@ -8,7 +8,7 @@ import { dehydrate, QueryClient, useQuery } from "react-query";
 import { useEffect } from "react";
 export default function Answered({ token }) {
     const router = useRouter()
-    const { data } = useQuery(["answered-clients", token], getAnsweredClients, {
+    const { data } = useQuery(["answered-clients", token], async () => await getAnsweredClients(token), {
         refetchOnMount: false,
         refetchOnWindowFocus: false,
     });
@@ -28,8 +28,8 @@ export default function Answered({ token }) {
                         {
                             data.clients?.length > 0
                                 ?
-                                data.clients.map(client =>
-                                    <ClientList client={client} />
+                                data.clients.map((client, index) =>
+                                    <ClientList key={index} client={client} index={index} />
                                 )
                                 :
                                 <h2 className="text-[1.3rem] opacity-90 ml-auto mt-3 ">لا يوجد عملاء تم مراسلتهم</h2>

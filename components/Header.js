@@ -56,7 +56,7 @@ export default function Header({ isAdmin }) {
                                     style={{ transition: "width .3s ease-in-out", background: "linear-gradient(129.85deg, #3B82F6 24.63%, #B388EB 90.62%)" }}
                                     className={`${activeLinkIndex === index ? "w-8" : "w-0"} rounded ml-auto h-1`}></div>
                                 <div className="flex">
-                                    <Link href={
+                                    <Link passRef href={
                                         router.pathname === "/"
                                             ? href
                                             :

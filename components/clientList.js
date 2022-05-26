@@ -1,7 +1,6 @@
-import React from 'react'
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faCheck, faMoneyBill } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
 import { useRouter } from "next/router";
 export default function ClientList({ client }) {
     const { name, project_description, date, email, socialLink, _id, deal } = client;
@@ -12,7 +11,6 @@ export default function ClientList({ client }) {
         const _id = e.target.closest("BUTTON").value;
         await axios.put('/api/clients/potential', { _id }, { withCredentials: true });
         e.target.closest(".client").remove();
-
     }
     const handleDeal = async e => {
         const confirm = window.confirm('هل قمت بعمل الصفقة؟')
@@ -28,12 +26,12 @@ export default function ClientList({ client }) {
         e.target.closest(".client").remove();
     }
     return (
-        <div key={_id} className="w-[100%] h-[100%] flex flex-col border-b-2  p-[.4em] mx-auto ar client">
+        <div className="w-[100%] h-[100%] flex flex-col border-b-2  p-[.4em] mx-auto ar client">
             <div>
                 <div className="flex items-center">
                     <p className="text-black_color text-[1.45rem] font-semibold">{name}</p>
                     {deal && <span className="text-green-500 text-[.95rem] mr-2">
-                        (<FontAwesomeIcon icon={faCheck}className="ml-1" />
+                        (<FontAwesomeIcon icon={faCheck} className="ml-1" />
                         Deal)
                     </span>}
                 </div>
