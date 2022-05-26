@@ -39,9 +39,7 @@ export default function Works({ reviews, averageRating, isAdmin, projects }) {
             </h1>
             <div className="sm:w-[92%] md:w-[80%] sm:min-h-[30vh] md:min-h-[50vh] grid grid-cols-2 gap-5 place-items-center mx-auto mt-8">
                 {
-        projects?.length > 0
-&&
-                    projects.map(({ arTitle,enTitle, slider }, i) =>
+                    projects?.map(({ arTitle,enTitle, slider }, i) =>
                         <Link key={i} href={`/project/${enTitle.replace(/" "/g, "-")}`}>
                             <div
                                 onMouseEnter={() => setSelectedProjectIndex(i)}
