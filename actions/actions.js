@@ -12,7 +12,7 @@ export const getProjectDetails = async title => {
     return data
 }
 export const getReviews = async () => {
-    const url = `${NEXT_PUBLIC_API_URL}/api/review`
+    const url = `${NEXT_PUBLIC_API_URL}/review`
     const { data } = await axios(url);
     return data
 }
