@@ -2,12 +2,12 @@ import { verify } from 'jsonwebtoken';
 const isAdmin = (req, res, next) => {
     try {
         const token = req.cookies.token || req.headers.token;
-        const { ADMIN_NAME, JWT_SECRET } = process.env;
+        const { ADMIN_PASSWORD, JWT_SECRET } = process.env;
         let isAdmin;
         verify(token, JWT_SECRET, (err, decoded) => {
             if (err) isAdmin = false
             else {
-                if (decoded.username === ADMIN_NAME) isAdmin = true
+                if (decoded.password === ADMIN_PASSWORD) isAdmin = true
                 else isAdmin = false
             }
         })

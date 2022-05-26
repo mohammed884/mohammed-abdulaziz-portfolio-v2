@@ -1,7 +1,8 @@
 import axios from "axios";
 const { NEXT_PUBLIC_API_URL } = process.env
 export const getProjects = async () => {
-    const url = `${NEXT_PUBLIC_API_URL}/project`
+    console.log(NEXT_PUBLIC_API_URL);
+    const url = `${NEXT_PUBLIC_API_URL}/project`;
     const { data } = await axios(url);
     return data
 }
