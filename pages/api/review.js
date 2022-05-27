@@ -1,5 +1,5 @@
 // import Review from "../../models/review";
-import multer from "multer";
+// import multer from "multer";
 import nc from "next-connect";
 import { nanoid } from 'nanoid';
 // import reviewSchema from "../../validation/review";
@@ -7,13 +7,13 @@ import { nanoid } from 'nanoid';
 // import isAdmin from "../../middleware/isAdmin";
 // import database from "../../middleware/database";
 // import fs from "fs"
-const upload = multer({
-    limits: { fileSize: 5242880 },
-    storage: multer.diskStorage({
-        destination: './public/uploads',
-        filename: (req, file, cb) => cb(null, `${nanoid()}-${file.originalname}`),
-    }),
-});
+// const upload = multer({
+//     limits: { fileSize: 5242880 },
+//     storage: multer.diskStorage({
+//         destination: './public/uploads',
+//         filename: (req, file, cb) => cb(null, `${nanoid()}-${file.originalname}`),
+//     }),
+// });
 const handler = nc({
     onError: (err, req, res, next) => {
         console.error(err.stack);
