@@ -3,7 +3,6 @@ import contactSchema from "../../validation/contact";
 import Client from "../../models/client";
 import dayjs from "dayjs";
 import database from "../../middleware/database"
-
 //SETUP HANDLER
 const handler = nc({
     onError: (err, req, res, next) => {
@@ -31,6 +30,7 @@ handler.post(async (req, res) => {
             date: dayjs().format("MMM D, YYYY"),
             analysis_date: dayjs().format("M/YYYY"),
         }).save();
+        
         res.send({ success: true, message: "تم ارسال رسالتك بنجاح سوف اقوم بمراسلتك في اقرب وقت ممكن" })
     } catch (err) {
         console.log(err);

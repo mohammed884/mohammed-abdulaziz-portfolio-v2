@@ -28,6 +28,7 @@ handler.use(database)
 handler.get(async (req, res) => {
     try {
         const projects = await Project.find().lean();
+        
         res.send({ success: true, projects });
     } catch (err) {
         console.log(err);
@@ -61,6 +62,8 @@ handler.post(upload.array("slider", 5), async (req, res) => {
             duration,
             client,
         }).save();
+        
+
         res.send({ success: true, message: "تم نشر المشروع" })
     } catch (err) {
         //REMOVE UPLOADED FILES
@@ -77,7 +80,9 @@ handler.delete(async (req, res) => {
         const { _id } = req.headers;
         const project = await Project.findOne({ _id});
         project.slider.forEach(img => fs.unlinkSync(`./public/uploads/${img}`))
-        await project.delete()
+        await project.delete();
+        
+
         res.send({ success: true })
     } catch (err) {
         console.log(err);

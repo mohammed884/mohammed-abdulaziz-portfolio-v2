@@ -1,7 +1,8 @@
 import nc from 'next-connect';
 import database from "../../../middleware/database";
 import isAdmin from "../../../middleware/isAdmin";
-import Client from "../../../models/client"
+import Client from "../../../models/client";
+
 const handler = nc({
     onError: (err, req, res, next) => {
         console.error(err.stack);
@@ -16,6 +17,7 @@ handler.use(isAdmin);
 handler.get(async (req, res) => {
     try {
         const clients = await Client.find({ answered: false });
+        
         res.send({ success: true, clients });
     } catch (err) {
         res.send({ success: false, message: err.message });
@@ -26,6 +28,8 @@ handler.put(async (req, res) => {
     try {
         const _id = req.body._id;
         await Client.updateOne({ _id }, { $set: { "answered": true } });
+        
+
         res.send({success: true})
     } catch (err) {
         console.log(err);
@@ -36,6 +40,7 @@ handler.delete(async (req, res) => {
     try {
         const _id = req.headers._id;
         await Client.deleteOne({ _id });
+        
         res.send({success: true})
     } catch (err) {
         console.log(err);

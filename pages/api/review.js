@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid';
 import reviewSchema from "../../validation/review";
 import dayjs from "dayjs";
 import isAdmin from "../../middleware/isAdmin";
-import database from "../../middleware/database"
+import database from "../../middleware/database";
 import fs from "fs"
 const upload = multer({
     limits: { fileSize: 5242880 },
@@ -24,11 +24,11 @@ const handler = nc({
     },
 })
 handler.use(database);
-
 handler.get(async (req, res) => {
     try {
         //SEND ALL REVIEWS
         const reviews = await Review.find().lean();
+        
         res.send(reviews);
     } catch (err) {
         console.log(err);
@@ -55,7 +55,8 @@ handler.post(upload.single("cover"), async (req, res) => {
             cover: fileName,
             date: dayjs().format("MMM D, YYYY"),
             analysis_date: dayjs().format("M/YYYY"),
-        }).save()
+        }).save();
+        
         res.send({ success: true, message: "تم نشر تجربتك بنجاح" })
     } catch (err) {
         //REMOVE UPLOADED FILE
@@ -73,7 +74,8 @@ handler.delete(isAdmin, async (req, res) => {
         const _id = req.headers._id;
         const review = await Review.findOne({ _id });
         if (review.cover !== "default.png") fs.unlinkSync(`./public/uploads/${review.cover}`);
-        await review.delete()
+        await review.delete();
+        
         res.send({ success: true })
     } catch (err) {
         console.log(err);

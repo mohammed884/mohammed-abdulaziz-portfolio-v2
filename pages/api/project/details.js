@@ -17,6 +17,7 @@ handler.get(async (req, res) => {
         const title = req.headers.title;
         const project = await Project.findOne({title});
         if (!project) return res.send({ success: false, message:"Invalid Title"})
+        
         res.send({ success: true, project });
     } catch (err) {
         console.log(err);

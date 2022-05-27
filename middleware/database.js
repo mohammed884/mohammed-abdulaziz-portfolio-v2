@@ -1,4 +1,4 @@
-import dbConnect from "../utilities/dbConnect"
+import dbConnect from "../utilities/db"
 const connect = async (req, res, next) => {
     try {
         await dbConnect();
