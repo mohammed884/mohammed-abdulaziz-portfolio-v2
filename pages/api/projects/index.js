@@ -10,7 +10,7 @@ import fs from "fs";
 const upload = multer({
     limits: { fileSize: 5242880 },
     storage: multer.diskStorage({
-        destination: '/app/uploads',
+        destination: '/app/tmp/uploads',
         filename: (req, file, cb) => cb(null, `${nanoid()}-${file.originalname}`),
     }),
 });
