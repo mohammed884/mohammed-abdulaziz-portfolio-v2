@@ -24,7 +24,6 @@ export default function Dashboard() {
 export const getServerSideProps = async ctx => {
     const token = ctx.req.cookies.token || "";
     const isAdmin = await getRole(token);
-    console.log(isAdmin);
     if (!isAdmin) return {
         redirect: {
             permanent: false,

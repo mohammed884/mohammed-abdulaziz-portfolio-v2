@@ -45,8 +45,6 @@ export default function Home({ token }) {
 }
 export const getServerSideProps = async ctx => {
   const token = ctx.req.cookies.token || "";
-  console.log("start fetching");
-  console.log(process.env.NEXT_PUBLIC_API_URL);
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery("reviews", getReviews);
   await queryClient.prefetchQuery("projects", getProjects);
