@@ -2,12 +2,12 @@ import axios from "axios";
 const {NEXT_PUBLIC_API_URL} = process.env
 export const getProjects = async () => {
     console.log(NEXT_PUBLIC_API_URL);
-    const url = `${NEXT_PUBLIC_API_URL}/project`;
+    const url = `${NEXT_PUBLIC_API_URL}/projects`;
     const { data } = await axios(url);
     return data
 }
 export const getProjectDetails = async title => {
-    const url = `${NEXT_PUBLIC_API_URL}/project/details`
+    const url = `${NEXT_PUBLIC_API_URL}/projects/details`
     const { data } = await axios(url, { headers: { title } });
     return data
 }

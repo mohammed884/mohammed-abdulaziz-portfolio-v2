@@ -30,7 +30,7 @@ export const headerLinks = [
 export const adminLinks = [
     {
         title:"اضف مشروع",
-        href:"/project/add"
+        href:"/projects/add"
     },
     {
         title:"العملاء المحتملين",
