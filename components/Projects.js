@@ -116,7 +116,7 @@ export default function Works({ reviews, averageRating, isAdmin, projects }) {
                 </Carousel>
                 <ul>
                     <li className="sm:w-[150px] md:w-[170px] h-[50px] flex items-center justify-center rounded-md text-[1rem] border-[3px] border-blue_color text-deep_blue hover:border-blue-600 font-bold mt-10 cursor-pointer">
-                        <Link href="/review">اكتب تجربتك معي</Link>
+                        <Link href="/review" passHref>اكتب تجربتك معي</Link>
                     </li>
                 </ul>
             </div>

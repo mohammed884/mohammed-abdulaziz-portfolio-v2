@@ -67,7 +67,7 @@ export default function Review() {
             <div className="sm:w-[85%] md:w-[70%] lg:w-[55%]  md:h-[70vh] relative">
                 <div className="w-[100%] flex items-center justify-between mx-auto">
                     <div data-aos="fade-right" onClick={() => Router.back()} style={{ transition: "transform .2s ease" }} className="w-[50px] flex items-center cursor-pointer text-center hover:translate-x-[-.9rem]">
-                        <Link href="/">
+                        <Link href="/" passHref >
                             <FontAwesomeIcon className="sm:text-[1.3rem] md:text-[1.4rem] lg:text-[1.5rem] text-yellow_color cursor-pointer font-medium" icon={faArrowLeft} />
                         </Link>
                     </div>
