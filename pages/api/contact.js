@@ -2,7 +2,7 @@ import nc from "next-connect";
 import contactSchema from "../../validation/contact";
 import Client from "../../models/client";
 import dayjs from "dayjs";
-import database from "../../middleware/database"
+import db from "../../utilities/db"
 //SETUP HANDLER
 const handler = nc({
     onError: (err, req, res, next) => {
@@ -14,7 +14,6 @@ const handler = nc({
     },
 });
 //CONNECT DB
-handler.use(database)
 handler.post(async (req, res) => {
     try {
         //STRUCTURE AND VALIDATE DATA
@@ -22,6 +21,7 @@ handler.post(async (req, res) => {
         await contactSchema.validateAsync({ name, email, description, socialLink, });
 
         //CREATE A NEW Potential Client
+        await db.connect()
         await new Client({
             name,
             email,
@@ -30,7 +30,8 @@ handler.post(async (req, res) => {
             date: dayjs().format("MMM D, YYYY"),
             analysis_date: dayjs().format("M/YYYY"),
         }).save();
-        
+        await db.disconnect()
+
         res.send({ success: true, message: "تم ارسال رسالتك بنجاح سوف اقوم بمراسلتك في اقرب وقت ممكن" })
     } catch (err) {
         console.log(err);

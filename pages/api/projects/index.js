@@ -7,6 +7,7 @@ import { nanoid } from "nanoid";
 import projectSchema from "../../../validation/project";
 import dayjs from "dayjs"
 import fs from "fs";
+import db from "../../../utilities/db"
 const upload = multer({
     limits: { fileSize: 5242880 },
     storage: multer.diskStorage({
@@ -24,11 +25,11 @@ const handler = nc({
         res.status(404).end("Page is not found");
     },
 });
-handler.use(database)
 handler.get(async (req, res) => {
     try {
+        await db.connect()
         const projects = await Project.find().lean();
-        
+        await db.disconnect()
         res.send({ success: true, projects });
     } catch (err) {
         console.log(err);
@@ -49,6 +50,7 @@ handler.post(upload.array("slider", 5), async (req, res) => {
         await projectSchema.validateAsync({ arTitle, enTitle, description, slider: fileNames, duration, client });
 
         //CREATE THE NEW PROJECT
+        await db.connect()
         await new Project({
             arTitle,
             enTitle,
@@ -62,8 +64,7 @@ handler.post(upload.array("slider", 5), async (req, res) => {
             duration,
             client,
         }).save();
-        
-
+        await db.disconnect()
         res.send({ success: true, message: "تم نشر المشروع" })
     } catch (err) {
         //REMOVE UPLOADED FILES
@@ -78,10 +79,11 @@ handler.post(upload.array("slider", 5), async (req, res) => {
 handler.delete(async (req, res) => {
     try {
         const { _id } = req.headers;
-        const project = await Project.findOne({ _id});
+        await db.connect()
+        const project = await Project.findOne({ _id });
         project.slider.forEach(img => fs.unlinkSync(`./public/uploads/${img}`))
         await project.delete();
-        
+        await db.disconnect()
 
         res.send({ success: true })
     } catch (err) {

@@ -1,6 +1,6 @@
 import nc from "next-connect";
 import Project from "../../../models/project";
-import database from "../../../middleware/database";
+import db from "../../../utilities/db";
 const handler = nc({
     attachParams: true,
     onError: (err, req, res, next) => {
@@ -11,13 +11,14 @@ const handler = nc({
         res.status(404).end("Page is not found");
     },
 });
-handler.use(database)
 handler.get(async (req, res) => {
     try {
         const title = req.headers.title;
-        const project = await Project.findOne({title});
-        if (!project) return res.send({ success: false, message:"Invalid Title"})
-        
+        await db.connect()
+        const project = await Project.findOne({ title });
+        if (!project) return res.send({ success: false, message: "Invalid Title" })
+        await db.disconnect()
+
         res.send({ success: true, project });
     } catch (err) {
         console.log(err);

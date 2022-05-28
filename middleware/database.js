@@ -1,7 +1,7 @@
-import dbConnect from "../utilities/db"
+import db from "../utilities/db"
 const connect = async (req, res, next) => {
     try {
-        await dbConnect();
+        await db.connect();
         next()
     } catch (err) {
         console.log(err);
