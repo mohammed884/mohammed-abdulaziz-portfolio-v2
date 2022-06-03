@@ -44,6 +44,7 @@ export default function Review() {
             setSuccessMessage(data.message)
             setErrorMessage("")
             setShowConfetti(true);
+            setIsLoading(false)
             setTimeout(() => {
                 setShowConfetti(false);
                 Router.push("/")
@@ -52,6 +53,8 @@ export default function Review() {
         } else {
             setErrorMessage(data.message)
             setSuccessMessage("")
+            setIsLoading(false)
+            
         }
     };
 
@@ -140,7 +143,15 @@ export default function Review() {
                         <input type="file" id="cover" className="hidden" onChange={e => setCover(e.target.files[0])} />
                         <span className="text-[1rem] mr-2">{cover ? cover.name : "(اختياري)"}</span>
                     </div>
-                    <button type="submit" className="w-[105px] h-[38px] bg-blue_color rounded-md text-white_color text-[1.15rem] mt-8 hover:bg-blue-600">انشر</button>
+                    <button type="submit" className="w-[105px] h-[38px] bg-blue_color rounded-md text-white_color text-[1.15rem] mt-8 hover:bg-blue-600">
+                        {
+                            isLoading
+                            ?
+                            <div className="loader"></div>
+                            :
+                            "انشر"
+                        } 
+                    </button>
                 </form>
             </div>
         </section>

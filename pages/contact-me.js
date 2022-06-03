@@ -27,14 +27,16 @@ export default function ContactMe() {
             description,
         };
         const { data } = await axios.post("/api/contact", info);
-        setIsLoading(false)
         if (data.success) {
             setSuccessMessage(data.message);
             setErrorMessage("");
+            setIsLoading(false)
             setTimeout(() => window.history.back(), 800)
         } else {
             setSuccessMessage("");
             setErrorMessage(data.message);
+            setIsLoading(false)
+
         };
     }
     return (
@@ -87,11 +89,11 @@ export default function ContactMe() {
                     </div>
                     <button type="submit" className="w-[105px] h-[38px] bg-blue_color rounded-md text-white_color text-[1.15rem] mt-8 hover:bg-blue-600">
                         {
-                            isLoading 
-                            ?
-                            "ارسل"
-                            :
-                            <span className="loader"></span> 
+                            isLoading
+                                ?
+                                <div className="loader"></div>
+                                :
+                                "راسلني"
                         }
                     </button>
                 </form>
