@@ -43,7 +43,7 @@ export default function Review() {
             setShowConfetti(true);
             setTimeout(() => {
                 setShowConfetti(false);
-                window.history.back()
+                Router.push("/")
             }, 2200)
         } else {
             setErrorMessage(data.message)
