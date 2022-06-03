@@ -37,8 +37,9 @@ handler.post(multerUpload.single("cover"), async (req, res) => {
 
         if (projectLink && projectLink.slice(0, 8) !== "https://") return res.send({ success: false, message: "اكتب رابط بصيغة صحيحة" })
         await reviewSchema.validateAsync({ name, description, stars });
-        const path = await cloudinaryMethods.single({ image: req.file, isRequired:false });
-        if (path.success !== undefined) return res.send({ success:false, message: path.message})
+        let path = {};
+        if (req.file) path = await cloudinaryMethods.single({ image: req.file, isRequired:false })
+        if (req.file && path.success !== undefined) return res.send({ success:false, message: path.message})
         //CREATE THE REVIEW
         await db.connect()
 
@@ -65,7 +66,7 @@ handler.delete(isAdmin, async (req, res) => {
     try {
         const _id = req.headers._id;
         const review = await Review.findOne({ _id });
-        if (review.cover !== "default.png") await cloudinaryMethods.deleteUpload(review.cover.publicId)
+        if (review.cover.publicId !== "default.png") await cloudinaryMethods.deleteUpload(review.cover.publicId)
         await db.connect()
 
         await review.delete();

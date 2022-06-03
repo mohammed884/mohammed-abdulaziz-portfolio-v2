@@ -6,10 +6,11 @@ cloudinary.config({
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
-const single = async ({ image, isRequired }) => {
+const single = async (image) => {
     try {
         //CHECK IF IMAGE ARE REQUIRED
-        if (!image && isRequired) return { success: false, message: "image is required" }
+        if (!image) return { success: false, message: "image is required" };
+
         //UPLOAD TO CLOUDINARY
         const result = await cloudinary.uploader.upload(image.path, {
             upload_preset: "portfolio_uploads",
@@ -23,10 +24,10 @@ const single = async ({ image, isRequired }) => {
         return { success: false, message: err.message }
     }
 }
-const multiple = async ({ images, isRequired }) => {
+const multiple = async (images) => {
     try {
         //CHECK IF IMAGE ARE REQUIRED
-        if (!images && isRequired) return { success: false, message: "images are required" }
+        if (!images) return { success: false, message: "images are required" }
         const paths = [];
         //LOOP OVER IMAGES AND UPLOAD IT
         for (let i = 0; i < images.length; i++) {

@@ -41,8 +41,3 @@ export const adminLinks = [
         href:"/clients/answered",
     },
 ]
-export const mimetypes = [
-    "image/jpeg",
-    "image/png",
-    "image/jpg",
-]

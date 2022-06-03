@@ -16,6 +16,7 @@ export default function Review() {
     const [confettiWidth, setConfettiWidth] = useState(0);
     const [confettiHeight, setConfettiHeight] = useState(0);
     const [showConfetti, setShowConfetti] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [errMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const nameInputRef = useRef(null);
@@ -29,6 +30,7 @@ export default function Review() {
         e.preventDefault();
         if (!name || !description || stars < 1) return setErrorMessage("من فضلك املا كل الحقول المطلوبة");
         if (projectLink && projectLink.slice(0, 8) !== "https://") return setErrorMessage("اكتب الرابط بصيغة صحيحة")
+        setIsLoading(true)
         const fd = new FormData();
         fd.append("name", name)
         fd.append("description", description)
@@ -37,6 +39,7 @@ export default function Review() {
         fd.append("cover", cover)
 
         const { data } = await axios.post("/api/review", fd, { headers: { 'content-type': 'multipart/form-data' } });
+        setIsLoading(false);
         if (data.success) {
             setSuccessMessage(data.message)
             setErrorMessage("")
@@ -44,7 +47,8 @@ export default function Review() {
             setTimeout(() => {
                 setShowConfetti(false);
                 Router.push("/")
-            }, 2200)
+            }, 2200);
+
         } else {
             setErrorMessage(data.message)
             setSuccessMessage("")

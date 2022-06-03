@@ -20,8 +20,16 @@ const Schema = mongoose.Schema({
         required: true,
     },
     cover: {
-        type: { url: { type: String }, publicId: { type: String } },
-        default: { url: "https://res.cloudinary.com/dhbkgb3ss/image/upload/v1654283968/uploads/default_q3xlly.png", publicId: "default" }
+        type: {
+            url: {
+                type: String,
+                default: "https://res.cloudinary.com/dhbkgb3ss/image/upload/v1654283968/uploads/default_q3xlly.png"
+            },
+            publicId: {
+                type: String,
+                default: "default.png"
+            }
+        },
     },
     projectLink: {
         type: String,

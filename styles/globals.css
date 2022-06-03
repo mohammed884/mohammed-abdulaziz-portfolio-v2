@@ -67,7 +67,15 @@ textarea::selection {
   * {
     @apply tracking-tight
   }
-
+  .loader {
+    @apply
+    w-[30px]
+    h-[30px]
+    rounded-[50%]
+    border-slate-500
+    border-t-white_color
+    animate-spin
+  }
   .menu-line {
     @apply w-[100%] h-[4px] bg-[#0070f3] rounded-md
   }

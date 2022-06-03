@@ -13,10 +13,13 @@ export default function ContactMe() {
     const [description, setDescription] = useState("");
     const [errMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
-    const nameInputRef = useRef(null)
+    const [isLoading, setIsLoading] = useState(false)
+    const nameInputRef = useRef(null);
+
     const handleSubmit = async e => {
         e.preventDefault();
         if (!name || !email || !socialLink || !description) return setErrorMessage("املا كل الحقول لمن فضلك")
+        setIsLoading(true)
         const info = {
             name,
             email,
@@ -24,6 +27,7 @@ export default function ContactMe() {
             description,
         };
         const { data } = await axios.post("/api/contact", info);
+        setIsLoading(false)
         if (data.success) {
             setSuccessMessage(data.message);
             setErrorMessage("");
@@ -81,7 +85,15 @@ export default function ContactMe() {
 
                         </textarea>
                     </div>
-                    <button type="submit" className="w-[105px] h-[38px] bg-blue_color rounded-md text-white_color text-[1.15rem] mt-8 hover:bg-blue-600">ارسل</button>
+                    <button type="submit" className="w-[105px] h-[38px] bg-blue_color rounded-md text-white_color text-[1.15rem] mt-8 hover:bg-blue-600">
+                        {
+                            isLoading 
+                            ?
+                            "ارسل"
+                            :
+                            <span className="loader"></span> 
+                        }
+                    </button>
                 </form>
             </div>
         </section>
