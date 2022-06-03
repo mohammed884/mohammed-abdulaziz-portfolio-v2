@@ -19,7 +19,7 @@ export default function WhyMe() {
     },
   ]
   return (
-    <section className="section-styling sm:h-[180vh] md:h-[108vh] lg:h-[124vh] xl:h-[101vh] ar">
+    <section className="section-styling sm:h-[192vh] md:h-[108vh] lg:h-[124vh] xl:h-[101vh] ar">
       <div data-aos="fade-down" className="flex flex-col items-center mb-5">
         <h1 className="title">لماذا انا</h1>
       </div>
