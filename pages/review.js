@@ -39,7 +39,6 @@ export default function Review() {
         fd.append("cover", cover)
 
         const { data } = await axios.post("/api/review", fd, { headers: { 'content-type': 'multipart/form-data' } });
-        setIsLoading(false);
         if (data.success) {
             setSuccessMessage(data.message)
             setErrorMessage("")
@@ -143,11 +142,11 @@ export default function Review() {
                         <input type="file" id="cover" className="hidden" onChange={e => setCover(e.target.files[0])} />
                         <span className="text-[1rem] mr-2">{cover ? cover.name : "(اختياري)"}</span>
                     </div>
-                    <button type="submit" className="w-[105px] h-[38px] bg-blue_color rounded-md text-white_color text-[1.15rem] mt-8 hover:bg-blue-600">
+                    <button disabled={isLoading} type="submit" className="w-[105px] h-[38px] flex items-center justify-center bg-blue_color hover:bg-blue-600 rounded-md text-white_color text-[1.15rem] mt-8">
                         {
                             isLoading
                             ?
-                            <div className="loader"></div>
+                            <span class="lds-ellipsis"><div></div><div></div><div></div><div></div></span>
                             :
                             "انشر"
                         } 

@@ -31,7 +31,7 @@ export default function ContactMe() {
             setSuccessMessage(data.message);
             setErrorMessage("");
             setIsLoading(false)
-            setTimeout(() => window.history.back(), 800)
+            setTimeout(() => Router.back(), 200)
         } else {
             setSuccessMessage("");
             setErrorMessage(data.message);
@@ -87,11 +87,11 @@ export default function ContactMe() {
 
                         </textarea>
                     </div>
-                    <button type="submit" className="w-[105px] h-[38px] bg-blue_color rounded-md text-white_color text-[1.15rem] mt-8 hover:bg-blue-600">
+                    <button disabled={isLoading} type="submit" className="w-[105px] h-[38px] flex items-center justify-center bg-blue_color rounded-md text-white_color text-[1.15rem] mt-8 hover:bg-blue-600">
                         {
                             isLoading
                                 ?
-                                <div className="loader"></div>
+                                <span class="lds-ellipsis"><div></div><div></div><div></div><div></div></span>
                                 :
                                 "راسلني"
                         }

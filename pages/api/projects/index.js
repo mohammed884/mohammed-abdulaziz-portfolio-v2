@@ -33,10 +33,9 @@ handler.post(multerUpload.array("slider"), async (req, res) => {
     try {
         //STRUCTURE AND VALIDATE DATA
         const { arTitle, enTitle, description, link, client, duration, yearOfCreation } = req.body;
-        await projectSchema.validateAsync({ arTitle, enTitle, description, duration, client });
-        let paths = [];
-        if (req.files) paths = await cloudinaryMethods.multiple({ images: req.files, isRequired: true });
-        if (req.files && paths.success !== undefined) return res.send({ success: false, message: paths.message });
+        await projectSchema.validateAsync({ arTitle, enTitle, description, duration, client, slider:req.files });
+        const paths = await cloudinaryMethods.multiple(req.files);
+        if (paths.success !== undefined) return res.send({ success: false, message: paths.message });
         await db.connect()
         await new Project({
             arTitle,

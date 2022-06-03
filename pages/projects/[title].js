@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from "next/image";
 import axios from "axios";
 import Head from "next/head";
@@ -19,7 +19,9 @@ export default function Work({ token }) {
     refetchOnMount: false,
     refetchOnWindowFocus: false
   });
-  if (!results[0].data.success) return Router.back();
+  useEffect(() => {
+    if (!results[0].data.success) return Router.back()
+  },[])
   const { arTitle, enTitle, slider, description, date, duration, client, link, _id } = results[0].data.project
   const isAdmin = results[1].data
   const handleDelete = async () => {
