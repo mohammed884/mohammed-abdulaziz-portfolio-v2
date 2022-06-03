@@ -37,7 +37,7 @@ handler.post(multerUpload.single("cover"), async (req, res) => {
 
         if (projectLink && projectLink.slice(0, 8) !== "https://") return res.send({ success: false, message: "اكتب رابط بصيغة صحيحة" })
         await reviewSchema.validateAsync({ name, description, stars });
-        const path = await cloudinaryMethods.single({ image: req.file });
+        const path = await cloudinaryMethods.single({ image: req.file, isRequired:false });
         if (path.success !== undefined) return res.send({ success:false, message: path.message})
         //CREATE THE REVIEW
         await db.connect()
