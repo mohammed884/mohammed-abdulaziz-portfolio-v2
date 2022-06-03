@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Link from 'next/link';
-import { headerLinks as links } from "../utilities/links"
+import { headerLinks as links } from "../utilities/constants"
 import { useRouter } from 'next/router';
 export default function Header({ isAdmin }) {
     const router = useRouter()

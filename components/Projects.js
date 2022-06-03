@@ -64,7 +64,7 @@ export default function Works({ reviews, averageRating, isAdmin, projects }) {
                                         {arTitle}
                                     </span>
                                 </div>
-                                <Image className={`${selectedProjectIndex === i && "scale-[.85]"}`} src={`/uploads/${slider[0]}`} quality="80"  width="550" height="350" alt={arTitle} style={{ transition: "transform .2s ease-in-out" }} />
+                                <Image className={`${selectedProjectIndex === i && "scale-[.85]"}`} src={`${slider[0].url}`} quality="80"  width="550" height="350" alt={arTitle} style={{ transition: "transform .2s ease-in-out" }} />
                             </div>
                         </Link>
 
@@ -93,7 +93,7 @@ export default function Works({ reviews, averageRating, isAdmin, projects }) {
                                 }}>
                                 </div>
                                 <div className="flex items-center" onClick={({ target }) => deleteReview(target, _id)}>
-                                    <Image src={`/uploads/${cover}`} width="37" height="37" alt={`${name}'s photo ${date}`} className="rounded-[50%] object-fit object-center" />
+                                    <Image src={cover.url} width="37" height="37" alt={`${name}'s photo ${date}`} className="rounded-[50%] object-fit object-center" />
                                     <span className="sm:text-[1.1rem] md:text-[1.25rem] text-black mr-2">{name}</span>
                                 </div>
                                 <label>

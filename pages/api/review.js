@@ -1,19 +1,11 @@
 import Review from "../../models/review";
-import multer from "multer";
 import nc from "next-connect";
-import { nanoid } from 'nanoid';
 import reviewSchema from "../../validation/review";
 import dayjs from "dayjs";
 import isAdmin from "../../middleware/isAdmin";
 import db from "../../utilities/db";
-import fs from "fs"
-const upload = multer({
-    limits: { fileSize: 5242880 },
-    storage: multer.diskStorage({
-        destination: '/tmp/uploads',
-        filename: (req, file, cb) => cb(null, `${nanoid()}-${file.originalname}`),
-    }),
-});
+import multerUpload from "../../middleware/multer";
+import { cloudinaryMethods } from "../../utilities/cloudinaryMethods";
 const handler = nc({
     onError: (err, req, res, next) => {
         console.error(err.stack);
@@ -38,17 +30,15 @@ handler.get(async (req, res) => {
         res.send("error")
     }
 })
-handler.post(upload.single("cover"), async (req, res) => {
+handler.post(multerUpload.single("cover"), async (req, res) => {
     try {
         //STRUCTURE AND VALIDATE DATA
         const { name, description, stars, projectLink } = req.body;
-        if (req.file) {
-            var fileName = req.file.filename;
-            var mimetype = req.file.mimetype;
-        }
-        if (projectLink && projectLink.slice(0, 8) !== "https://") return res.send({ success: false, message: "اكتب رابط بصيغة صحيحة" })
-        await reviewSchema.validateAsync({ name, description, stars, mimetype });
 
+        if (projectLink && projectLink.slice(0, 8) !== "https://") return res.send({ success: false, message: "اكتب رابط بصيغة صحيحة" })
+        await reviewSchema.validateAsync({ name, description, stars });
+        const path = await cloudinaryMethods.single({ image: req.file });
+        if (path.success !== undefined) return res.send({ success:false, message: path.message})
         //CREATE THE REVIEW
         await db.connect()
 
@@ -57,7 +47,7 @@ handler.post(upload.single("cover"), async (req, res) => {
             description,
             stars,
             projectLink,
-            cover: fileName,
+            cover: path,
             date: dayjs().format("MMM D, YYYY"),
             analysis_date: dayjs().format("M/YYYY"),
         }).save();
@@ -65,10 +55,6 @@ handler.post(upload.single("cover"), async (req, res) => {
 
         res.send({ success: true, message: "تم نشر تجربتك بنجاح" })
     } catch (err) {
-        //REMOVE UPLOADED FILE
-        if (fileName) {
-            fs.unlinkSync(`./public/uploads/${fileName}`)
-        }
         if (!err.isJoi) return res.send({ success: false, message: err.message })
         const message = err.details[0].message.replace(/"/g, "");
         res.send({ success: false, message })
@@ -79,7 +65,7 @@ handler.delete(isAdmin, async (req, res) => {
     try {
         const _id = req.headers._id;
         const review = await Review.findOne({ _id });
-        if (review.cover !== "default.png") fs.unlinkSync(`./public/uploads/${review.cover}`);
+        if (review.cover !== "default.png") await cloudinaryMethods.deleteUpload(review.cover.publicId)
         await db.connect()
 
         await review.delete();

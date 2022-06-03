@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import { adminLinks as links } from "../utilities/links";
+import { adminLinks as links } from "../utilities/constants";
 import Header from "../components/Header";
 import { getRole } from "../actions/actions"
 export default function Dashboard() {

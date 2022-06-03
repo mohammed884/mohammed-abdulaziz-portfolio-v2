@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, } from '@fortawesome/free-solid-svg-icons';
 import { getRole, } from '../../actions/actions';
-
+import Router from 'next/router';
 export default function AddProject() {
     const router = useRouter()
     const [arTitle, setArTitle] = useState("");
@@ -36,11 +36,12 @@ export default function AddProject() {
         fd.append("description", description)
         fd.append("yearOfCreation", yearOfCreation)
         slider.forEach(img => fd.append("slider", img))
-        const { data } = await axios.post("/api/project", fd, { headers: { 'content-type': 'multipart/form-data' } });
+
+        const { data } = await axios.post("/api/projects", fd,);
         if (data.success) {
             setSuccessMessage(data.message);
             setErrorMessage("")
-            setTimeout(() => Router.push(`/project/${enTitle}`), 400)
+            setTimeout(() => Router.push(`/projects/${enTitle}`), 400)
         } else {
             setErrorMessage(data.message)
             setSuccessMessage("")

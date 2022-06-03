@@ -1,20 +1,12 @@
 import nc from "next-connect";
 import isAdmin from "../../../middleware/isAdmin"
-import database from "../../../middleware/database"
 import Project from "../../../models/project";
-import multer from "multer";
-import { nanoid } from "nanoid";
 import projectSchema from "../../../validation/project";
 import dayjs from "dayjs"
 import fs from "fs";
-import db from "../../../utilities/db"
-const upload = multer({
-    limits: { fileSize: 5242880 },
-    storage: multer.diskStorage({
-        destination: '/tmp/uploads',
-        filename: (req, file, cb) => cb(null, `${nanoid()}-${file.originalname}`),
-    }),
-});
+import db from "../../../utilities/db";
+import { cloudinaryMethods } from "../../../utilities/cloudinaryMethods";
+import multerUpload from "../../../middleware/multer";
 const handler = nc({
     attachParams: true,
     onError: (err, req, res, next) => {
@@ -37,25 +29,19 @@ handler.get(async (req, res) => {
     }
 });
 handler.use(isAdmin)
-handler.post(upload.array("slider", 5), async (req, res) => {
+handler.post(multerUpload.array("slider"), async (req, res) => {
     try {
         //STRUCTURE AND VALIDATE DATA
         const { arTitle, enTitle, description, link, client, duration, yearOfCreation } = req.body;
-        const mimetypes = ["image/png", "image/jpeg", "image/jpg"];
-        var fileNames = req.files.map(img => {
-            if (!mimetypes.includes(img.mimetype)) return res.send({ success: false, message: "حمل الصور بصيغة صحيحة" });
-            else return img.filename
-        });
-
-        await projectSchema.validateAsync({ arTitle, enTitle, description, slider: fileNames, duration, client });
-
-        //CREATE THE NEW PROJECT
+        await projectSchema.validateAsync({ arTitle, enTitle, description, duration, client });
+        const paths = await cloudinaryMethods.multiple({ images: req.files, isRequired: true });
+        if (paths.success !== undefined) return res.send({ success: false, message: paths.message });
         await db.connect()
         await new Project({
             arTitle,
             enTitle,
             description,
-            slider: fileNames,
+            slider: paths,
             link,
             date: {
                 published: dayjs().format("MMM D, YYYY"),
@@ -67,10 +53,6 @@ handler.post(upload.array("slider", 5), async (req, res) => {
         await db.disconnect()
         res.send({ success: true, message: "تم نشر المشروع" })
     } catch (err) {
-        //REMOVE UPLOADED FILES
-        fileNames.forEach(fileName => {
-            fs.unlinkSync(`./public/uploads/${fileName}`)
-        })
         if (!err.isJoi) return res.send({ success: false, message: err.message })
         const message = err.details[0].message.replace(/"/g, "");
         res.send({ success: false, message })
@@ -81,9 +63,10 @@ handler.delete(async (req, res) => {
         const { _id } = req.headers;
         await db.connect()
         const project = await Project.findOne({ _id });
-        project.slider.forEach(img => fs.unlinkSync(`./public/uploads/${img}`))
+        const publicIds = project.slider.map(img => img.publicId);
+        publicIds.forEach(async publicId => await cloudinaryMethods.deleteUpload(publicId))
         await project.delete();
-        await db.disconnect()
+        await db.disconnect();
 
         res.send({ success: true })
     } catch (err) {
@@ -94,6 +77,6 @@ handler.delete(async (req, res) => {
 export const config = {
     api: {
         bodyParser: false,
-    },
-};
+    }
+}
 export default handler;

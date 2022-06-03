@@ -10,7 +10,7 @@ import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useQueries, QueryClient, dehydrate } from 'react-query';
 import { getRole, getProjectDetails } from '../../actions/actions';
 export default function Work({ token }) {
-  const [path, setPath] = useState("");
+  const [mainImgUrl, setMainImgUrl] = useState("");
   const router = Router.useRouter();
   const results = useQueries([
     { queryKey: ["project-details", router.query.title], queryFn: getProjectDetails },
@@ -24,7 +24,7 @@ export default function Work({ token }) {
   const isAdmin = results[1].data
   const handleDelete = async () => {
     if (!isAdmin) return;
-    const { data } = await axios.delete("/api/project", { headers: { _id } });
+    const { data } = await axios.delete("/api/projects", { headers: { _id } });
     if (data.success) Router.push("/")
   };
   return (
@@ -37,14 +37,14 @@ export default function Work({ token }) {
         <div className="w-[100%] flex sm:flex-col lg:flex-row-reverse">
           <div className="w-[100%] mx-auto mt-8">
             <div className="w-[95%] mx-auto flex flex-row relative justify-center">
-              <Image src={`/uploads/${path || slider[0]}`} quality="100" width="600" height="350" className="rounded-sm" alt="Main image" />
+              <Image src={mainImgUrl || slider[0].url} quality="100" width="600" height="350" className="rounded-sm" alt="Main image" />
               <div className="sm:w-[24%] md:w-[10%] lg:w-[16%] xl:w-[10%] min-h-[100%] flex flex-col justify-between border-r-2 rounded-sm mr-3 p-[.4em]  en">
                 {
                   slider.map((img, index) =>
                     <Image
                       key={index}
-                      onClick={() => setPath(img)}
-                      src={`/uploads/${img}`}
+                      onClick={() => setMainImgUrl(img.url)}
+                      src={img.url}
                       width="38"
                       height="40"
                       alt={`slider image ${index}`}

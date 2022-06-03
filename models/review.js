@@ -20,8 +20,8 @@ const Schema = mongoose.Schema({
         required: true,
     },
     cover: {
-        type: String,
-        default: "default.png"
+        type: { url: { type: String }, publicId: { type: String } },
+        default: { url: "https://res.cloudinary.com/dhbkgb3ss/image/upload/v1654283968/uploads/default_q3xlly.png", publicId: "default" }
     },
     projectLink: {
         type: String,
@@ -31,8 +31,8 @@ const Schema = mongoose.Schema({
         required: true,
     },
     analysis_date: {
-        type:String,
-        required:true,
+        type: String,
+        required: true,
     },
 });
 const Review = mongoose.models.Review || mongoose.model('Review', Schema);
