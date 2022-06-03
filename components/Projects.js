@@ -27,8 +27,8 @@ export default function Works({ reviews, averageRating, isAdmin, projects }) {
     };
     const deleteReview = async (target, _id) => {
         if (!isAdmin) return;
-        const check = window.confirm('Are you sure you want to DELETE THIS?')
-        if (!check) return
+        const isSure = window.confirm('Are you sure you want to DELETE THIS REVIEW?')
+        if (!isSure) return
         const { data } = await axios.delete("/api/review", { headers: { _id } });
         if (data.success) target.closest(".review").remove()
     }
@@ -40,7 +40,7 @@ export default function Works({ reviews, averageRating, isAdmin, projects }) {
             <div className="sm:w-[92%] md:w-[80%] sm:min-h-[30vh] md:min-h-[50vh] grid grid-cols-2 gap-5 place-items-center mx-auto mt-8">
                 {
                     projects?.map(({ arTitle,enTitle, slider }, i) =>
-                        <Link key={i} href={`/projects/${enTitle.replace(/" "/g, "-")}`}>
+                        <Link key={i} href={`/projects/${enTitle.replace(/ /g, "-")}`}>
                             <div
                                 onMouseEnter={() => setSelectedProjectIndex(i)}
                                 onMouseLeave={() => setSelectedProjectIndex(-1)}

@@ -24,6 +24,8 @@ export default function Work({ token }) {
   const isAdmin = results[1].data
   const handleDelete = async () => {
     if (!isAdmin) return;
+    const isSure = window.confirm('Are you sure you want to delete the project?');
+    if (!isSure) return;
     const { data } = await axios.delete("/api/projects", { headers: { _id } });
     if (data.success) Router.push("/")
   };
