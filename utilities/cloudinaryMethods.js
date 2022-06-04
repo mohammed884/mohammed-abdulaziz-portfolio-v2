@@ -60,7 +60,6 @@ const deleteUpload = async (publicId) => {
             api_key: process.env.CLOUDINARY_API_KEY,
             api_secret: process.env.CLOUDINARY_API_SECRET
         });
-
         await cloudinary.uploader.destroy(publicId);
     } catch (err) {
         console.log(err);

@@ -65,9 +65,9 @@ handler.post(multerUpload.single("cover"), async (req, res) => {
 handler.delete(isAdmin, async (req, res) => {
     try {
         const _id = req.headers._id;
+        await db.connect()
         const review = await Review.findOne({ _id });
         if (review.cover.publicId !== "default.png") await cloudinaryMethods.deleteUpload(review.cover.publicId)
-        await db.connect()
 
         await review.delete();
 
