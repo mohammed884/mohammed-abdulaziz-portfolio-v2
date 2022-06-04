@@ -6,7 +6,7 @@ import Link from "next/link"
 import Confetti from 'react-confetti';
 import Head from "next/head";
 import Router from "next/router";
-import Loader from '../components/loader';
+import Loader from '../components/Loader';
 export default function Review() {
     const [name, setName] = useState("");
     const [cover, setCover] = useState("");
