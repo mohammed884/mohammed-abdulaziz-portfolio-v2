@@ -11,7 +11,7 @@ export default function Home() {
           <h1 className=" sm:text-[1.7rem] lg:text-[2.1rem] xl:text-[2.3rem] text-blue_color font-bold">
             محمد عبدالعزيز مبرمج و مصمم مواقع
           </h1>
-          <p className="sm:w-[99%] md:w-[380px] lg:w-[450px] xl:w-[575px] text-[#040C2D] sm:text-[1.1rem] xl:text-[1.25rem] mt-2">اساعد الاشخاص و  الشركات الناشئة و المتوسطة في البدء العمل على فكرة موقعهم و تحسينها و العمل على جعلها حقيقة بافضل صورة ممكنة</p>
+          <p className="sm:w-[99%] md:w-[380px] lg:w-[450px] xl:w-[575px] text-[#040C2D] sm:text-[1.1rem] xl:text-[1.25rem] mt-2">اساعد الاشخاص و الشركات الناشئة و المتوسطة في تطوير و تصميم موقعهم و العمل على جعلها حقيقة بافضل صورة ممكنة</p>
         </div>
       </div>
     </section>
