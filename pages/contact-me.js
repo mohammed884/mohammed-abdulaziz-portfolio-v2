@@ -5,7 +5,7 @@ import axios from "axios";
 import Link from "next/link";
 import Head from "next/head";
 import Router from "next/router";
-import Loader from '../../components/Loader'
+import Loader from '../components/Loader'
 
 export default function ContactMe() {
     const [name, setName] = useState("");
