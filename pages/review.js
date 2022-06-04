@@ -6,6 +6,7 @@ import Link from "next/link"
 import Confetti from 'react-confetti';
 import Head from "next/head";
 import Router from "next/router";
+import Loader from '../components/loader';
 export default function Review() {
     const [name, setName] = useState("");
     const [cover, setCover] = useState("");
@@ -53,7 +54,7 @@ export default function Review() {
             setErrorMessage(data.message)
             setSuccessMessage("")
             setIsLoading(false)
-            
+
         }
     };
 
@@ -69,6 +70,10 @@ export default function Review() {
                     width={confettiWidth}
                     height={confettiHeight}
                 />
+            }
+            {
+                isLoading &&
+                <Loader />
             }
             <div className="sm:w-[85%] md:w-[70%] lg:w-[55%]  md:h-[70vh] relative">
                 <div className="w-[100%] flex items-center justify-between mx-auto">
@@ -143,13 +148,7 @@ export default function Review() {
                         <span className="text-[1rem] mr-2">{cover ? cover.name : "(اختياري)"}</span>
                     </div>
                     <button disabled={isLoading} type="submit" className="w-[105px] h-[38px] flex items-center justify-center bg-blue_color hover:bg-blue-600 rounded-md text-white_color text-[1.15rem] mt-8">
-                        {
-                            isLoading
-                            ?
-                            <span className="lds-ellipsis"><div></div><div></div><div></div><div></div></span>
-                            :
-                            "انشر"
-                        } 
+                        انشر
                     </button>
                 </form>
             </div>

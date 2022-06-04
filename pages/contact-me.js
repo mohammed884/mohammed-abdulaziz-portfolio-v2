@@ -5,6 +5,7 @@ import axios from "axios";
 import Link from "next/link";
 import Head from "next/head";
 import Router from "next/router";
+import Loader from '../../components/Loader'
 
 export default function ContactMe() {
     const [name, setName] = useState("");
@@ -44,6 +45,10 @@ export default function ContactMe() {
             <Head>
                 <title>تواصل معي</title>
             </Head>
+            {
+                isLoading &&
+                <Loader />
+            }
             <div className="sm:w-[85%] md:w-[70%] lg:w-[55%] h-[70vh] relative">
                 <div className="w-[100%] flex items-center justify-between mx-auto">
                     <div data-aos="fade-right" onClick={() => Router.back()} style={{ transition: "transform .2s ease" }} className="w-[50px] flex items-center cursor-pointer text-center hover:translate-x-[-.9rem]">

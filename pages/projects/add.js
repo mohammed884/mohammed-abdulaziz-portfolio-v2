@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, } from '@fortawesome/free-solid-svg-icons';
 import { getRole, } from '../../actions/actions';
 import Router from 'next/router';
+import Loader from '../../components/Loader'
 export default function AddProject() {
     const router = useRouter()
     const [arTitle, setArTitle] = useState("");
@@ -19,6 +20,7 @@ export default function AddProject() {
     const [projectLink, setProjectLink] = useState("");
     const [errMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    const [isLoading, setIsLoading] = useState(false)
     const titleInputRef = useRef(null);
     useLayoutEffect(() => {
         titleInputRef.current.focus();
@@ -27,6 +29,7 @@ export default function AddProject() {
         e.preventDefault();
         if (!arTitle || !enTitle || !description || slider.length < 1) return setErrorMessage("من فضلك املا كل الحقول المطلوبة");
         if (projectLink && projectLink.slice(0, 8) !== "https://") return setErrorMessage("اكتب الرابط بصيغة صحيحة")
+        setIsLoading(true)
         const fd = new FormData();
         fd.append("arTitle", arTitle)
         fd.append("enTitle", enTitle)
@@ -40,11 +43,14 @@ export default function AddProject() {
         const { data } = await axios.post("/api/projects", fd,);
         if (data.success) {
             setSuccessMessage(data.message);
-            setErrorMessage("")
+            setErrorMessage("");
+            setIsLoading(false)
             setTimeout(() => Router.push(`/projects/${enTitle}`), 400)
         } else {
             setErrorMessage(data.message)
             setSuccessMessage("")
+            setIsLoading(false)
+
         }
     };
 
@@ -53,6 +59,10 @@ export default function AddProject() {
             <Head>
                 <title>اضافة مشروع</title>
             </Head>
+            {
+                isLoading &&
+                <Loader />
+            }
             <div className="sm:w-[85%] md:w-[70%] lg:w-[55%] relative">
                 <div className="w-[100%] flex items-center justify-between mx-auto">
                     <div data-aos="fade-right" onClick={() => router.back()} style={{ transition: "transform .2s ease" }} className="w-[50px] flex items-center cursor-pointer text-center hover:translate-x-[-.9rem]">
