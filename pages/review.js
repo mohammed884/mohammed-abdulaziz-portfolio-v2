@@ -146,7 +146,7 @@ export default function Review() {
                         {
                             isLoading
                             ?
-                            <span class="lds-ellipsis"><div></div><div></div><div></div><div></div></span>
+                            <span className="lds-ellipsis"><div></div><div></div><div></div><div></div></span>
                             :
                             "انشر"
                         } 
