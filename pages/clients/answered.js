@@ -1,11 +1,10 @@
 import Head from "next/head";
 import ClientList from "../../components/clientList";
 import { useRouter } from "next/router";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, } from '@fortawesome/free-solid-svg-icons';
 import { getAnsweredClients, } from "../../actions/actions";
 import { dehydrate, QueryClient, useQuery } from "react-query";
 import { useEffect } from "react";
+import BackBtn from "../../components/BackBtn";
 export default function Answered({ token }) {
     const router = useRouter()
     const { data } = useQuery(["answered-clients", token], async () => await getAnsweredClients(token), {
@@ -20,10 +19,7 @@ export default function Answered({ token }) {
             </Head>
             <section className="section-styling">
                 <div className="sm:w-[92%] h-[100%] md:w-[80%] lg:w-[70%] flex flex-col justify-center mx-auto">
-                    <div className="w-[90%] flex justify-between items-center mx-auto mt-5">
-                        <FontAwesomeIcon onClick={() => router.back()} icon={faArrowLeft} className="text-yellow_color text-[1.2rem] cursor-pointer" />
-                        <h1 className="sm:text-[1.59rem] md:text-[1.8rem] lg:text-[1.9rem] text-blue_color font-bold">عملاء تم مراسلتهم</h1>
-                    </div>
+        <BackBtn/>
                     <div className="w-[90%] min-h-[80%] grid grid-cols-1 mx-auto mt-12">
                         {
                             data.clients?.length > 0

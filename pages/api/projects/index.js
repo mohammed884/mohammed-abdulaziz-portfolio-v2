@@ -63,8 +63,7 @@ handler.delete(async (req, res) => {
         const { _id } = req.headers;
         await db.connect()
         const project = await Project.findOne({ _id });
-        const publicIds = project.slider.map(img => img.publicId);
-        publicIds.forEach(async publicId => await cloudinaryMethods.deleteUpload(publicId))
+        project.slider.forEach(async img => await cloudinaryMethods.deleteUpload(img.publicId))
         await project.delete();
         await db.disconnect();
 

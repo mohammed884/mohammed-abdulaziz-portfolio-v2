@@ -1,11 +1,9 @@
 import React, { useState, useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
-import Link from "next/link";
 import Head from "next/head";
 import Router from "next/router";
 import Loader from '../components/Loader'
+import BackBtn from '../components/BackBtn';
 
 export default function ContactMe() {
     const [name, setName] = useState("");
@@ -51,11 +49,7 @@ export default function ContactMe() {
             }
             <div className="sm:w-[85%] md:w-[70%] lg:w-[55%] h-[70vh] relative">
                 <div className="w-[100%] flex items-center justify-between mx-auto">
-                    <div data-aos="fade-right" onClick={() => Router.back()} style={{ transition: "transform .2s ease" }} className="w-[50px] flex items-center cursor-pointer text-center hover:translate-x-[-.9rem]">
-                        <Link href="/" passHref>
-                            <FontAwesomeIcon className="sm:text-[1.3rem] md:text-[1.4rem] lg:text-[1.5rem] text-yellow_color cursor-pointer font-medium" icon={faArrowLeft} />
-                        </Link>
-                    </div>
+                    <BackBtn />
                     <h1 data-aos="zoom-out" className="sm:text-[1.9rem] md:text-[2.1rem] lg:text-[2.15rem] text-blue_color font-bold">ارسل لي رسالة</h1>
                 </div>
                 <form className="sm:w-[92%] md:w-[90%]" onSubmit={handleSubmit} encType="multipart/form-data">

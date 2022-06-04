@@ -7,7 +7,6 @@ const Schema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true,
     },
     project_description: {
         type: String,
