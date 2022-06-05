@@ -37,12 +37,12 @@ export default function Work({ token }) {
       <Head>
         <title>{arTitle}</title>
       </Head>
-      <div className="sm:w-[88%] h-[90vh] lg:w-[90%] xl:w-[80%] 2xl:w-[70%] flex flex-col justify-around items-center mx-auto ar">
+      <div className="sm:w-[88%] sm:h-[100vh] md:h-[90vh] lg:w-[90%] xl:w-[80%] 2xl:w-[70%] flex flex-col justify-around items-center mx-auto ar">
         <div className="w-[100%] flex sm:flex-col lg:flex-row-reverse">
           <div className="w-[100%] mx-auto mt-8">
             <div className="w-[95%] mx-auto flex flex-row relative justify-center">
               <Image src={mainImgUrl || slider[0].url} quality="100" width="600" height="350" className="rounded-sm" alt="Main image" />
-              <div className="sm:w-[24%] md:w-[10%] lg:w-[16%] xl:w-[10%] min-h-[100%] flex flex-col justify-between border-r-2 rounded-sm mr-3 p-[.4em]  en">
+              <div className="sm:w-[24%] md:w-[10%] lg:w-[16%] xl:w-[10%] min-h-[100%] flex flex-col justify-between border-r-2 rounded-sm mr-3 p-[.4em] en overflow-scroll">
                 {
                   slider.map((img, index) =>
                     <Image
@@ -60,7 +60,7 @@ export default function Work({ token }) {
           </div>
           <div className="sm:w-[100%] xl:w-[80%] sm:mt-8 lg:mt-0">
             <div data-aos="fade-down">
-              <h1 className="sm:text-[1.8rem] md:text-[2.3rem] lg:text-[2.7rem] xl:text-[2.9rem] text-blue_color font-bold">
+              <h1 className="sm:text-[1.85rem] md:text-[2.3rem] lg:text-[2.7rem] xl:text-[2.9rem] text-blue_color font-bold">
                 {arTitle}
               </h1>
               <time className="sm:text-[.8rem] lg:text-[.9rem]">{date.published}</time>
