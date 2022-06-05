@@ -58,7 +58,7 @@ export default function Work({ token }) {
               </div>
             </div>
           </div>
-          <div className="sm:w-[100%] xl:w-[80%] sm:mt-8 lg:mt-0">
+          <div className="sm:w-[100%] xl:w-[70%] sm:mt-2 lg:mt-0">
             <div data-aos="fade-down">
               <h1 className="sm:text-[1.85rem] md:text-[2.3rem] lg:text-[2.7rem] xl:text-[2.9rem] text-blue_color font-bold">
                 {arTitle}
@@ -70,7 +70,7 @@ export default function Work({ token }) {
             </textarea>
           </div>
         </div>
-        <div className="w-[100%] p-[.3rem]">
+        <div className="w-[100%] p-[.3rem] mt-4">
           <div className="flex items-center">
             <div data-aos="fade-left" className="w-2 sm:h-10 lg:h-10 rounded-md" style={{ background: "linear-gradient(129.85deg, #3B82F6 24.63%, #B388EB 65.62%)" }}></div>
             <div className="inline-flex items-center">
