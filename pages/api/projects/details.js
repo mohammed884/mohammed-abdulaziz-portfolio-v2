@@ -15,7 +15,7 @@ handler.get(async (req, res) => {
     try {
         const title = req.headers.title;
         await db.connect()
-        const project = await Project.findOne({ title });
+        const project = await Project.findOne({ enTitle: title });
         if (!project) return res.send({ success: false, message: "Invalid Title" })
         await db.disconnect()
 
