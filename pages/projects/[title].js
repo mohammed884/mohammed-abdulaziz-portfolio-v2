@@ -37,7 +37,7 @@ export default function Work({ token }) {
       <Head>
         <title>{arTitle}</title>
       </Head>
-      <div className="sm:w-[88%] sm:h-[115vh] md:h-[90vh] lg:w-[90%] xl:w-[80%] 2xl:w-[70%] flex flex-col justify-around items-center mx-auto ar">
+      <div className="sm:w-[88%] sm:h-[120vh] md:h-[90vh] lg:w-[90%] xl:w-[80%] 2xl:w-[70%] flex flex-col justify-around items-center mx-auto ar">
         <div className="w-[100%] flex sm:flex-col lg:flex-row-reverse">
           <div className="w-[100%] mx-auto mt-8">
             <div className="w-[95%] mx-auto flex flex-row relative justify-center">
@@ -58,7 +58,7 @@ export default function Work({ token }) {
               </div>
             </div>
           </div>
-          <div className="sm:w-[100%] xl:w-[70%] sm:mt-2 lg:mt-0">
+          <div className="sm:w-[100%] xl:w-[80%] sm:mt-2 lg:mt-0">
             <div data-aos="fade-down">
               <h1 className="sm:text-[1.85rem] md:text-[2.3rem] lg:text-[2.7rem] xl:text-[2.9rem] text-blue_color font-bold">
                 {arTitle}
