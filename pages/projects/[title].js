@@ -32,12 +32,12 @@ export default function Work({ token }) {
     if (data.success) Router.push("/")
   };
   return (
-    <section className="section-styling">
+    <section className="section-styling sm:h-[130vh]">
       <Header isAdmin={isAdmin} />
       <Head>
         <title>{arTitle}</title>
       </Head>
-      <div className="sm:w-[88%] sm:h-[100vh] md:h-[90vh] lg:w-[90%] xl:w-[80%] 2xl:w-[70%] flex flex-col justify-around items-center mx-auto ar">
+      <div className="sm:w-[88%] sm:h-[115vh] md:h-[90vh] lg:w-[90%] xl:w-[80%] 2xl:w-[70%] flex flex-col justify-around items-center mx-auto ar">
         <div className="w-[100%] flex sm:flex-col lg:flex-row-reverse">
           <div className="w-[100%] mx-auto mt-8">
             <div className="w-[95%] mx-auto flex flex-row relative justify-center">
