@@ -170,7 +170,7 @@ textarea::selection {
   }
 
   .section-styling {
-    @apply w-[100%] h-[100vh] bg-white_color
+    @apply w-[100%] sm:h-[120vh] md:h-[100vh] bg-white_color
   }
 
   .title {

@@ -19,11 +19,11 @@ export default function WhyMe() {
     },
   ]
   return (
-    <section className="section-styling sm:h-[192vh] md:h-[108vh] lg:h-[124vh] xl:h-[101vh] ar">
+    <section className="section-styling sm:h-[210vh] md:h-[108vh] lg:h-[124vh] xl:h-[101vh] ar">
       <div data-aos="fade-down" className="flex flex-col items-center mb-5">
         <h1 className="title">لماذا انا</h1>
       </div>
-      <div className="w-[70%] h-[80vh] flex flex-col items-center justify-between mt-8 mx-auto">
+      <div className="w-[70%] sm:h-[88vh] md:h-[80vh] flex flex-col items-center justify-between mt-8 mx-auto">
         {
           features.map(({ title, why, svg }, i) =>
             <div data-aos={`${i % 2 === 0 ? "fade-left" : "fade-right"}`} className={`flex items-center sm:flex-col sm:mt-8 md:mt-0 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`} key={i}>
