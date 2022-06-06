@@ -1,23 +1,7 @@
 import Img from "next/image";
 import Link from "next/link";
+import { whyMeFutures } from "../utilities/constants";
 export default function WhyMe() {
-  const features = [
-    {
-      title: "خطوة بخطوة",
-      why: "اول مرة تقوم بطلب موقع؟ حظيت بتجربة سيئة من قبل؟ لا تقلق سوف امر بك خطوة بخطوة في العملية من التصميم الى البرمجة ثم الى رفع موقعك ",
-      svg: "steps.svg"
-    },
-    {
-      title: "حسب الطلب",
-      why: "من ناحية التصميم, الميزات, و الوظائف سوف يكون موقعك مفصل خصيصا لك",
-      svg: "custom.svg"
-    },
-    {
-      title: "موعد التسليم",
-      why: "واحد من اهم الامور في العمل بالنسبة لي هي المواعيد والالتزام بيها. تاكد انني لن افوته",
-      svg: "dead-line.svg"
-    },
-  ]
   return (
     <section className="section-styling sm:h-[210vh] md:h-[108vh] lg:h-[124vh] xl:h-[101vh] ar">
       <div data-aos="fade-down" className="flex flex-col items-center mb-5">
@@ -25,7 +9,7 @@ export default function WhyMe() {
       </div>
       <div className="w-[70%] sm:h-[88vh] md:h-[80vh] flex flex-col items-center justify-between mt-8 mx-auto">
         {
-          features.map(({ title, why, svg }, i) =>
+          whyMeFutures.map(({ title, why, svg }, i) =>
             <div data-aos={`${i % 2 === 0 ? "fade-left" : "fade-right"}`} className={`flex items-center sm:flex-col sm:mt-8 md:mt-0 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`} key={i}>
               <Img width="210" height="210" src={`/svgs/${svg}`} alt={title} />
               <div className={`${i % 2 === 0 ? "md:ml-2" : " md:mr-2"} sm:mt-3 md:mt-0`}>

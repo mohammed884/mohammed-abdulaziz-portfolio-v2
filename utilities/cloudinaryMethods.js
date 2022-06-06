@@ -42,7 +42,6 @@ const multiple = async (images) => {
                 folder: "uploads",
                 allowed_formats: "jpg, png, jpeg"
             });
-            console.log(img);
             paths.push({ url: result.secure_url, publicId: result.public_id });
         }
         //RETURN THE REQUIRED CREDENTIALS

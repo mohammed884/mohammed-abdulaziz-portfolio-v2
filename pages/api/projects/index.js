@@ -39,7 +39,7 @@ handler.post(multerUpload.array("slider"), async (req, res) => {
         await db.connect()
         await new Project({
             arTitle,
-            enTitle,
+            enTitle:enTitle.replace(/ /g, "-"),
             description,
             slider: paths,
             link,

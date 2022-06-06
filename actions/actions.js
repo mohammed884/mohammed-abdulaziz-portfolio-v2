@@ -36,3 +36,10 @@ export const getPotentialClients = async token => {
     const { data } = await axios(url, { headers: { token } });
     return data
 }
+export const deleteReview = async (target, _id, isAdmin) => {
+    if (!isAdmin) return;
+    const isSure = window.confirm('Are you sure you want to DELETE THIS REVIEW?')
+    if (!isSure) return
+    const { data } = await axios.delete("/api/review", { headers: { _id } });
+    if (data.success) target.closest(".review").remove()
+}

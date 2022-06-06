@@ -8,7 +8,7 @@ export default function Header({ isAdmin }) {
     const [activeLinkIndex, setActiveLinkIndex] = useState(router.pathname === "/" ? links.length - 1 : -1);
     return (
         <header className={`w-[100%] ${isOpen ? isAdmin ? "sm:h-[325px]" : "sm:h-[300px]" : "sm:h-[40px]"} overflow-hidden md:h-[70px] bg-white_color sm:flex-col md:flex-row items-center flex fixed z-30`}>
-            <div className="w-[95%] sm:flex items-center justify-between md:hidden mt-3 ar">
+            <div className="w-[95%] sm:flex items-center justify-between md:hidden mt-2 ar">
                 <div onClick={() => setIsOpen(!isOpen)} className="w-[25px] h-[30px] flex flex-col items-center justify-center cursor-pointer relative">
                     <div
                         className={`
@@ -21,7 +21,7 @@ export default function Header({ isAdmin }) {
                         menu-line menu-line-3 ${isOpen ? "rotate-[-46deg] bg-red-500" : "absolute top-[22px] rotate-0"}
                     `}></div>
                 </div>
-                {/* <img src="/images/work-template.png" className="w-[25px] h-[25px]" alt="test" /> */}
+                <span className="font-bold">Dev. Mohammed</span>
             </div>
             <nav className="w-[100%]">
                 <ul className={`
