@@ -89,7 +89,7 @@ export default function Work({ token }) {
           </div>
           <div className="sm:w-[100%] xl:w-[50%] flex justify-between mt-5">
             <div>
-              <p className="sm:text-[.99rem] md:text-lg text-black_color">التاريخ</p>
+              <p className="sm:text-[.99rem] md:text-lg text-black_color">تاريخ العمل</p>
               <time className="sm:text-sm md:text-[.95rem] lg:text-[1rem] opacity-90">{date.yearOfCreation}</time>
             </div>
             <div>
