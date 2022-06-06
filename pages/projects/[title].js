@@ -45,18 +45,18 @@ export default function Work({ token }) {
               <Image src={mainImgUrl || slider[1].url} quality="100" width="600" height="350" className="rounded-sm" alt="Main image" />
               <div className="w-[100%] flex flex-row justify-between border-t-2 rounded-sm p-[.4em] mt-2 en">
                 {
-                  slider.map((img, index) => {
+                  slider.map((img, index) =>
                     index !== 0
-                      &&
-                      <Image
-                        key={index}
-                        onClick={() => setMainImgUrl(img.url)}
-                        src={img.url}
-                        width="38"
-                        height="40"
-                        alt={`slider image ${index}`}
-                        className="cursor-pointer rounded-sm hover:opacity-90" />
-                  }
+                    &&
+                    <Image
+                      key={index}
+                      onClick={() => setMainImgUrl(img.url)}
+                      src={img.url}
+                      width="38"
+                      height="40"
+                      alt={`slider image ${index}`}
+                      className="cursor-pointer rounded-sm hover:opacity-90" />
+
                   )
                 }
               </div>
