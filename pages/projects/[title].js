@@ -9,9 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useQueries, QueryClient, dehydrate } from 'react-query';
 import { getRole, getProjectDetails } from '../../actions/actions';
-import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { carouselResponsive as responsive } from '../../utilities/constants';
 export default function Work({ token }) {
   const [mainImgUrl, setMainImgUrl] = useState("");
   const router = Router.useRouter();
@@ -45,7 +43,7 @@ export default function Work({ token }) {
           <div className="sm:w-[100%] md:w-[80%] lg:w-[56%] h-[80%] mx-auto mt-8">
             <div className="max-w-[95%] mx-auto flex flex-col relative justify-center">
               <Image src={mainImgUrl || slider[1].url} quality="100" width="600" height="350" className="rounded-sm" alt="Main image" />
-              <div className="w-[100%] flex flex-row justify-between border-t-2 rounded-sm mr-3 p-[.4em] mt-2 en">
+              <div className="w-[100%] flex flex-row justify-between border-t-2 rounded-sm p-[.4em] mt-2 en">
                 {
                   slider.map((img, index) => {
                     index !== 0
