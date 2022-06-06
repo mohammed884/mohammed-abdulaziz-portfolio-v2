@@ -63,7 +63,7 @@ export default function AddProject() {
             }
             <div className="sm:w-[85%] md:w-[70%] lg:w-[55%] relative">
                 <div className="w-[100%] flex items-center justify-between mx-auto">
-<BackBtn/>
+                    <BackBtn path="/dashboard" />
                     <h1 data-aos="zoom-out" className="sm:text-[1.9rem] md:text-[2.1rem] lg:text-[2.15rem] text-blue_color font-bold">اضف مشروع</h1>
                 </div>
                 <form className="sm:w-[92%] md:w-[90%] mt-8" onSubmit={handleSubmit} encType="multipart/form-data">

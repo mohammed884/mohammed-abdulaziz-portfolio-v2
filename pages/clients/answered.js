@@ -19,7 +19,7 @@ export default function Answered({ token }) {
             </Head>
             <section className="section-styling">
                 <div className="sm:w-[92%] h-[100%] md:w-[80%] lg:w-[70%] flex flex-col justify-center mx-auto">
-                    <BackBtn />
+                    <BackBtn path="/dashboard"/>
                     <div className="w-[90%] min-h-[80%] grid grid-cols-1 mx-auto mt-12">
                         {
                             data.clients?.length > 0

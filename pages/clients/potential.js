@@ -18,19 +18,20 @@ export default function PotentialClients({ token }) {
                 <title>العملاء المحتملين</title>
             </Head>
             <div className="sm:w-[92%] h-[100%] md:w-[80%] lg:w-[70%] flex flex-col justify-center mx-auto">
-        <BackBtn/>
-                    <div className="w-[90%] min-h-[80%] grid grid-cols-1 mx-auto mt-12">
-                        {
-                            data.clients?.length > 0
-                                ?
-                                data.clients.map((client, index) =>
-                                    <ClientList key={index} client={client} index={index} />
-                                )
-                                :
-                                <h2 className="text-[1.3rem] opacity-90 ml-auto mt-3 ">لا يوجد عملاء تم مراسلتهم</h2>
-                        }
-                    </div>
+                <BackBtn path="/dashboard" />
+
+                <div className="w-[90%] min-h-[80%] grid grid-cols-1 mx-auto mt-12">
+                    {
+                        data.clients?.length > 0
+                            ?
+                            data.clients.map((client, index) =>
+                                <ClientList key={index} client={client} index={index} />
+                            )
+                            :
+                            <h2 className="text-[1.3rem] opacity-90 ml-auto mt-3 ">لا يوجد عملاء محتملين</h2>
+                    }
                 </div>
+            </div>
         </section>
     )
 };
