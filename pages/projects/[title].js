@@ -56,7 +56,6 @@ export default function Work({ token }) {
                       height="40"
                       alt={`slider image ${index}`}
                       className="cursor-pointer rounded-sm hover:opacity-90" />
-
                   )
                 }
               </div>

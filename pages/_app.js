@@ -1,9 +1,9 @@
-import Layout from '../components/Layout';
-import Head from "next/head"
 import { useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "../styles/globals.css";
+import "@fontsource/tajawal";
+
 import {
   QueryClient,
   QueryClientProvider,

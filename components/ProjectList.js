@@ -6,7 +6,7 @@ export default function ProjectList({ project, index }) {
     const [selectedProjectIndex, setSelectedProjectIndex] = useState(-1);
     const { slider, arTitle, enTitle } = project;
     return (
-        <Link href={`/projects/${enTitle}`}>
+        <Link href={`/projects/${enTitle}`} passHref >
             <div
                 onMouseEnter={() => setSelectedProjectIndex(index)}
                 onMouseLeave={() => setSelectedProjectIndex(-1)}
