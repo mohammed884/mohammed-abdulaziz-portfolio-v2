@@ -17,7 +17,7 @@ handler.get(async (req, res) => {
     try {
         await db.connect()
 
-        const clients = await Client.find({ answered: true });
+        const clients = await Client.find({ answered: true }).lean();
         await db.disconnect()
 
         res.send({ success: true, clients });

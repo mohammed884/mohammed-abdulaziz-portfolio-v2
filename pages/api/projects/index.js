@@ -3,12 +3,10 @@ import isAdmin from "../../../middleware/isAdmin"
 import Project from "../../../models/project";
 import projectSchema from "../../../validation/project";
 import dayjs from "dayjs"
-import fs from "fs";
 import db from "../../../utilities/db";
 import { cloudinaryMethods } from "../../../utilities/cloudinaryMethods";
 import multerUpload from "../../../middleware/multer";
 const handler = nc({
-    attachParams: true,
     onError: (err, req, res, next) => {
         console.error(err.stack);
         res.status(500).end("Something broke!");

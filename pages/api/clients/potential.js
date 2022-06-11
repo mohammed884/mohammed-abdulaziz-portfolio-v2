@@ -16,7 +16,7 @@ handler.use(isAdmin);
 handler.get(async (req, res) => {
     try {
         await db.connect()
-        const clients = await Client.find({ answered: false });
+        const clients = await Client.find({ answered: false }).lean();
         await db.disconnect()
         res.send({ success: true, clients });
     } catch (err) {
