@@ -43,7 +43,7 @@ header li {
 }
 
 textarea::selection {
-  background: #0E185F;
+  background: #E2DCC8;
   color: #F9FAFE;
 }
 .gradient-line {
