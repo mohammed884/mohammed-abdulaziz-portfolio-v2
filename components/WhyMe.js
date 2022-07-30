@@ -5,7 +5,7 @@ export default function WhyMe() {
   return (
     <section className="section-styling sm:h-[210vh] md:h-[108vh] lg:h-[124vh] xl:h-[101vh] ar">
       <div data-aos="fade-down" className="flex flex-col items-center mb-5">
-        <h1 className="title">لماذا انا</h1>
+        <h1 className="title">لماذا موقعك سيكون رائع</h1>
       </div>
       <div className="w-[70%] sm:h-[88vh] md:h-[80vh] flex flex-col items-center justify-between mt-8 mx-auto">
         {
@@ -20,10 +20,10 @@ export default function WhyMe() {
           )
         }
         <div className="flex flex-col items-center sm:mt-8 md:mt-0">
-          <h3 className="text-[2.5rem] text-blue_color font-bold mb-5">مهتم؟</h3>
+          <h3 className="text-[2.5rem] text-custom_green font-bold mb-5">مهتم؟</h3>
           <ul>
             <li className="text-[1.35rem] text-deep_blue list-none hover:underline">
-              <Link href="/contact-me">يمكنك مراسلتني من هنا</Link>
+              <Link href="/contact-me">راسلني من هنا</Link>
             </li>
           </ul>
         </div>

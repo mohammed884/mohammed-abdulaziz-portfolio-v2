@@ -78,7 +78,7 @@ export default function Review() {
             <div className="sm:w-[85%] md:w-[70%] lg:w-[55%]  md:h-[70vh] relative">
                 <div className="w-[100%] flex items-center justify-between mx-auto">
                     <BackBtn />
-                    <h1 data-aos="zoom-out" className="sm:text-[1.9rem] md:text-[2.1rem] lg:text-[2.15rem] text-blue_color font-bold">اكتب تجربتك معي</h1>
+                    <h1 data-aos="zoom-out" className="sm:text-[1.9rem] md:text-[2.1rem] lg:text-[2.15rem] text-custom_green font-bold">اكتب تجربتك معي</h1>
                 </div>
                 <form className="sm:w-[92%] md:w-[90%] mt-8" onSubmit={handleSubmit} encType="multipart/form-data">
                     {
@@ -114,7 +114,6 @@ export default function Review() {
                         <label htmlFor="description"></label>
 
                         <textarea id="description" onChange={({ target: { value } }) => setDescription(value)} placeholder="كيف كانت تجربتك؟">
-
                         </textarea>
                     </div>
                     <div className="mt-3">
@@ -139,11 +138,11 @@ export default function Review() {
                         <span className="sm:text-[.81rem] md:text-[.91rem] mr-2">( {stars} )</span>
                     </div>
                     <div>
-                        <label style={{ transition: "border .3s ease" }} className="text-[1.1rem] border-2 border-dashed hover:border-blue_color ml-1 p-2 cursor-pointer" htmlFor="cover">حمل صورة</label>
+                        <label style={{ transition: "border .3s ease" }} className="text-[1.1rem] border-2 border-dashed hover:border-[#E9DAC1] ml-1 p-2 cursor-pointer" htmlFor="cover">حمل صورة</label>
                         <input type="file" id="cover" className="hidden" onChange={e => setCover(e.target.files[0])} />
                         <span className="text-[1rem] mr-2">{cover ? cover.name : "(اختياري)"}</span>
                     </div>
-                    <button disabled={isLoading} type="submit" className="w-[105px] h-[38px] flex items-center justify-center bg-blue_color hover:bg-blue-600 rounded-md text-white_color text-[1.15rem] mt-8">
+                    <button disabled={isLoading} type="submit" className="w-[105px] h-[38px] flex items-center justify-center bg-custom_green hover:bg-deep_green rounded-md text-white_color text-[1.15rem] mt-8">
                         انشر
                     </button>
                 </form>

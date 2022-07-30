@@ -50,7 +50,7 @@ export default function ContactMe() {
             <div className="sm:w-[85%] md:w-[70%] lg:w-[55%] h-[70vh] relative">
                 <div className="w-[100%] flex items-center justify-between mx-auto">
                     <BackBtn />
-                    <h1 data-aos="zoom-out" className="sm:text-[1.9rem] md:text-[2.1rem] lg:text-[2.15rem] text-blue_color font-bold">ارسل لي رسالة</h1>
+                    <h1 data-aos="zoom-out" className="sm:text-[1.9rem] md:text-[2.1rem] lg:text-[2.15rem] text-custom_green font-bold">ارسل لي رسالة</h1>
                 </div>
                 <form className="sm:w-[92%] md:w-[90%]" onSubmit={handleSubmit} encType="multipart/form-data">
                     {
@@ -86,7 +86,7 @@ export default function ContactMe() {
 
                         </textarea>
                     </div>
-                    <button disabled={isLoading} type="submit" className="w-[105px] h-[38px] flex items-center justify-center bg-blue_color rounded-md text-white_color text-[1.15rem] mt-8 hover:bg-blue-600">
+                    <button disabled={isLoading} type="submit" className="w-[105px] h-[38px] flex items-center justify-center bg-custom_green rounded-md text-white_color hover:bg-deep_green text-[1.15rem] mt-8 ">
                         {
                             isLoading
                                 ?

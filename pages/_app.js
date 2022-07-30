@@ -2,8 +2,8 @@ import { useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "../styles/globals.css";
-import "@fontsource/tajawal";
-
+import "@fontsource/cairo";
+import Layout from "../components/Layout"
 import {
   QueryClient,
   QueryClientProvider,
@@ -28,7 +28,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient.current}>
       <Hydrate state={pageProps.dehydratedState}>
-        <Component {...pageProps} />
+      <Layout>
+      <Component {...pageProps} />
+    </Layout>
       </Hydrate>
     </QueryClientProvider>
   )

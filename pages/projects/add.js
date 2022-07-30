@@ -64,7 +64,7 @@ export default function AddProject() {
             <div className="sm:w-[85%] md:w-[70%] lg:w-[55%] relative">
                 <div className="w-[100%] flex items-center justify-between mx-auto">
                     <BackBtn path="/dashboard" />
-                    <h1 data-aos="zoom-out" className="sm:text-[1.9rem] md:text-[2.1rem] lg:text-[2.15rem] text-blue_color font-bold">اضف مشروع</h1>
+                    <h1 data-aos="zoom-out" className="sm:text-[1.9rem] md:text-[2.1rem] lg:text-[2.15rem] text-custom_green font-bold">اضف مشروع</h1>
                 </div>
                 <form className="sm:w-[92%] md:w-[90%] mt-8" onSubmit={handleSubmit} encType="multipart/form-data">
                     {
@@ -145,7 +145,7 @@ export default function AddProject() {
                     <div>
                         <label
                             style={{ transition: "border .3s ease" }}
-                            className="text-[1.1rem] border-2 border-dashed hover:border-blue_color ml-1 p-2 cursor-pointer"
+                            className="text-[1.1rem] border-2 border-dashed hover:border-[#E9DAC1] ml-1 p-2 cursor-pointer"
                             htmlFor="slider">
                             صور المشروع
                         </label>
@@ -156,7 +156,7 @@ export default function AddProject() {
                             onChange={e => setSlider([...e.target.files])}
                             multiple />
                     </div>
-                    <button type="submit" className="w-[105px] h-[38px] bg-blue_color rounded-md text-white_color text-[1.15rem] mt-8 hover:bg-blue-600">انشر</button>
+                    <button type="submit" className="w-[105px] h-[38px] bg-custom_green rounded-md text-white_color text-[1.15rem] mt-8 hover:bg-deep_green">انشر</button>
                 </form>
             </div>
         </section>

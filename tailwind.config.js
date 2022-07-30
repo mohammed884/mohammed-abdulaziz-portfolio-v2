@@ -28,6 +28,9 @@ module.exports = {
         white_color: "#F9FAFE",
         purple_color: "#B388EB",
         deep_blue: "#0E185F",
+        custom_green: "#1A4D2E",
+        custom_beige:"#FEFBF6",
+        deep_green:"#123922"
       },
     },
   },

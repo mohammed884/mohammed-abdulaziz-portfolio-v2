@@ -10,7 +10,7 @@ export default function Document() {
                 <link rel="icon" href="/icon.png" />
                 <link rel="apple-touch-icon" href="/icon.png" />
             </Head>
-            <body>
+            <body className="bg-custom_beige">
                 <Main />
                 <NextScript />
             </body>

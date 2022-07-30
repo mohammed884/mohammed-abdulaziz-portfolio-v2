@@ -3,7 +3,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Tajawal', sans-serif;
+  font-family: 'Cairo', sans-serif;
   font-display: swap;
 }
 
@@ -46,7 +46,9 @@ textarea::selection {
   background: #0E185F;
   color: #F9FAFE;
 }
-
+.gradient-line {
+  background: linear-gradient(129.85deg, #E2DCC8 25.63%, #E4D1B9 65.62%)
+}
 .ar {
   direction: rtl;
 }
@@ -56,16 +58,16 @@ textarea::selection {
 }
 
 #__next {
-  scroll-behavior: smooth
+  scroll-behavior: smooth;
 }
-
+.bg-none {
+  background:none;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @layer components {
-  * {
-    @apply tracking-tight
-  }
+
 
   .menu-line {
     @apply w-[100%] h-[4px] bg-[#0070f3] rounded-md
@@ -77,11 +79,11 @@ textarea::selection {
   }
 
   .section-styling {
-    @apply w-[100%] sm:h-[120vh] md:h-[100vh] bg-white_color
+    @apply w-[100%] sm:h-[120vh] md:h-[100vh] 
   }
 
   .title {
-    @apply w-fit font-bold sm:text-[1.85rem] md:text-[2rem] lg:text-[2.2rem] text-blue_color mx-auto
+    @apply w-fit font-bold sm:text-[1.85rem] md:text-[2rem] lg:text-[2.2rem] text-[#1A4D2E] mx-auto
   }
 
   .dash {
@@ -101,11 +103,11 @@ textarea::selection {
   }
 
   form input {
-    @apply w-[100%] h-[40px] p-[.45em] mt-2 border-b-2 focus:border-b-blue_color rounded-sm outline-none bg-transparent duration-75 transition-all ease-in
+    @apply w-[100%] h-[40px] p-[.45em] mt-2 border-b-2 focus:border-b-[#E9DAC1] rounded-sm outline-none bg-transparent duration-75 transition-all ease-in
   }
 
   form textarea {
-    @apply w-[100%] h-[70px] max-h-[120px] bg-white_color p-[.45em] rounded-sm border-b-2 focus:border-b-blue_color outline-none
+    @apply w-[100%] h-[70px] max-h-[120px] bg-custom_beige p-[.45em] rounded-sm border-b-2 focus:border-b-[#E9DAC1] outline-none
   }
 
   form textarea::placeholder,

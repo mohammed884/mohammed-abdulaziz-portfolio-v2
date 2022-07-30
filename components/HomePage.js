@@ -1,3 +1,4 @@
+import Image from "next/image"
 export default function Home() {
   return (
     <section id="home" className="section-styling relative overflow-hidden">
@@ -8,11 +9,16 @@ export default function Home() {
         </div>
 
         <div className="ar">
-          <h1 className=" sm:text-[1.7rem] lg:text-[2.1rem] xl:text-[2.3rem] text-blue_color font-bold">
-            محمد عبدالعزيز مبرمج و مصمم مواقع
+          <h1 className=" sm:text-[1.7rem] lg:text-[2.1rem] xl:text-[2.3rem] text-[#1A4D2E] font-bold">
+            مبرمج و مصمم مواقع وجدت لتخدم هدفا
           </h1>
-          <p className="sm:w-[99%] md:w-[380px] lg:w-[450px] xl:w-[575px] text-[#040C2D] sm:text-[1.1rem] xl:text-[1.25rem] mt-2">اساعد الاشخاص و الشركات الناشئة و المتوسطة في تطوير و تصميم موقعهم و العمل على جعلها حقيقة بافضل صورة ممكنة</p>
+          <p className="sm:w-[99%] md:w-[380px] lg:w-[450px] xl:w-[575px] text-[#040C2D] sm:text-[1.15rem] md:text-[1.2rem] lg:text-[1.3rem] xl:text-[1.4rem] mt-2">
+            اقدم خدمات برمجة وتصميم المواقع الإلكترونية لاصحاب الشركات الناشئة و المتوسطة
+          </p>
         </div>
+      </div>
+      <div>
+        <Image src="/wave.svg" width="1000" height="250"/>
       </div>
     </section>
   )

@@ -7,18 +7,18 @@ export default function Header({ isAdmin }) {
     const [isOpen, setIsOpen] = useState(false);
     const [activeLinkIndex, setActiveLinkIndex] = useState(router.pathname === "/" ? links.length - 1 : -1);
     return (
-        <header className={`w-[100%] ${isOpen ? isAdmin ? "sm:h-[325px]" : "sm:h-[300px]" : "sm:h-[40px]"} overflow-hidden md:h-[70px] bg-white_color sm:flex-col md:flex-row items-center flex fixed z-30`}>
+        <header className={`w-[100%] ${isOpen ? isAdmin ? "sm:h-[325px]" : "sm:h-[300px]" : "sm:h-[40px]"} bg-custom_beige overflow-hidden md:h-[70px] sm:flex-col md:flex-row items-center flex fixed z-30`}>
             <div className="w-[95%] sm:flex items-center justify-between md:hidden mt-2 ar">
                 <div onClick={() => setIsOpen(!isOpen)} className="w-[25px] h-[30px] flex flex-col items-center justify-center cursor-pointer relative">
                     <div
                         className={`
-                        menu-line menu-line-1 ${isOpen ? "rotate-[45deg] bg-red-500" : "absolute bottom-[22px] rotate-0"}
+                        menu-line menu-line-1 ${isOpen ? "rotate-[45deg] bg-red-500" : "absolute bottom-[22px] rotate-0 bg-[#D29D2B]"}
                     `}>
                     </div>
-                    <div className={`menu-line ml-auto w-[70%] menu-line-2 ${isOpen ? "opacity-0" : "opacity-100"}`}></div>
+                    <div className={`menu-line ml-auto w-[70%] menu-line-2 ${isOpen ? "opacity-0" : "opacity-100 bg-[#D29D2B]"}`}></div>
                     <div
                         className={`
-                        menu-line menu-line-3 ${isOpen ? "rotate-[-46deg] bg-red-500" : "absolute top-[22px] rotate-0"}
+                        menu-line menu-line-3 ${isOpen ? "rotate-[-46deg] bg-red-500" : "absolute top-[22px] rotate-0 bg-[#D29D2B]"}
                     `}></div>
                 </div>
                 <span className="font-bold">Dev. Mohammed</span>
@@ -53,8 +53,8 @@ export default function Header({ isAdmin }) {
                             hover:scale-[.92] 
                             ${admin && !isAdmin ? "hidden" : "block"}`}>
                                 <div
-                                    style={{ transition: "width .3s ease-in-out", background: "linear-gradient(129.85deg, #3B82F6 24.63%, #B388EB 90.62%)" }}
-                                    className={`${activeLinkIndex === index ? "w-8" : "w-0"} rounded ml-auto h-1`}></div>
+                                    style={{ transition: "width .3s ease-in-out" }}
+                                    className={`${activeLinkIndex === index ? "w-8" : "w-0"} rounded ml-auto h-1 gradient-line`}></div>
                                 <div className="flex">
                                     <Link passRef href={
                                         router.pathname === "/"

@@ -33,7 +33,7 @@ export default function Home({ token }) {
       </Head>
       <Slider />
       <Header isAdmin={isAdmin} homeRef={homeRef} worksRef={worksRef} servicesRef={servicesRef} />
-      <main ref={mainRef} className="bg-white_color overflow-hidden scroll-smooth">
+      <main ref={mainRef} className="bg-[#FEFBF6] overflow-hidden scroll-smooth">
         <HomePage homeRef={homeRef} />
         <div id="projects" ref={worksRef} className="h-[75px]"></div>
         <Projects projects={projects} reviews={reviews} averageRating={averageRating} isAdmin={isAdmin} />

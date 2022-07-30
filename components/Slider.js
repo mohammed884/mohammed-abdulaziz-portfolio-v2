@@ -24,8 +24,8 @@ export default function Slider() {
       }, 290);
     }, []);
     return (
-        <div data-aos="fade-right" data-aos-delay="330" ref={sliderRef} className={`w-[100%] h-[100vh] ${show ? "grid" : "hidden"} place-items-center fixed z-[90000]`} style={{ background: "linear-gradient(102.92deg, #B388EB 28.41%, #FFC623 103.31%)" }}>
-            <h1 ref={welcomeTextRef} className="font-bold sm:text-[2rem] md:text-[3.5rem] lg:text-[5rem] text-[#F9FAFE]">مرحبا بك</h1>
+        <div data-aos="fade-right" data-aos-delay="330" ref={sliderRef} className={`w-[100%] h-[100vh] ${show ? "grid" : "hidden"} place-items-center fixed z-[90000] gradient-line`}>
+            <h1 ref={welcomeTextRef} className="font-bold sm:text-[2rem] md:text-[3.5rem] lg:text-[5rem] text-white">مرحبا بك</h1>
         </div>
     )
 }

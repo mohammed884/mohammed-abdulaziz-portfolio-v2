@@ -8,7 +8,7 @@ import ProjectList from './ProjectList';
 import Link from "next/link"
 export default function Works({ reviews, averageRating, isAdmin, projects }) {
     return (
-        <section className="w-[100%] sm:min-h-[120vh] md:min-h-[100vh] overflow-hidden">
+        <section className="w-[100%] sm:min-h-[120vh] bg-[#FEFBF6] md:min-h-[100vh] overflow-hidden">
             <h1 data-aos="fade-down" className="title mb-3">
                 مشاريع مختارة
             </h1>
@@ -24,7 +24,7 @@ export default function Works({ reviews, averageRating, isAdmin, projects }) {
             </div>
             <div className="w-[80%] h-[50vh] mx-auto mt-10 ar">
                 <div className="flex items-center relative">
-                    <div data-aos="fade-left" className="w-2 sm:h-10 lg:h-12 rounded-md" style={{ background: "linear-gradient(129.85deg, #3B82F6 24.63%, #B388EB 65.62%)" }}></div>
+                    <div data-aos="fade-left" className="w-2 sm:h-10 lg:h-12 rounded-md gradient-line"></div>
 
                     <div className="w-[100%] flex items-center mr-3">
                         <h2 className="flex font-bold text-black_color sm:text-[1.8rem] md:text-[2rem] lg:text-[2.3rem]">الآراء</h2>
@@ -43,7 +43,7 @@ export default function Works({ reviews, averageRating, isAdmin, projects }) {
                     }
                 </Carousel>
                 <ul>
-                    <li className="sm:w-[150px] md:w-[170px] h-[50px] flex items-center justify-center rounded-md text-[1rem] border-[3px] border-blue_color text-deep_blue hover:border-blue-600 font-bold mt-10 cursor-pointer">
+                    <li className="sm:w-[150px] md:w-[170px] h-[50px] flex items-center justify-center rounded-md text-[1rem] border-[3px] border-[#1A4D2E] text-slate-800 hover:border-[#123922] font-bold mt-10 cursor-pointer">
                         <Link href="/review" passHref>اكتب تجربتك معي</Link>
                     </li>
                 </ul>
