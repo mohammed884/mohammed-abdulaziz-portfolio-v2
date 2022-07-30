@@ -42,7 +42,7 @@ export default function Work({ token }) {
         <div className="w-[100%] flex sm:flex-col lg:flex-row-reverse items-center">
           <div className="sm:w-[100%] md:w-[80%] lg:w-[56%] h-[80%] mx-auto mt-8">
             <div className="max-w-[95%] mx-auto flex flex-col relative justify-center">
-              <Image src={mainImgUrl || slider[1].url} quality="100" width="600" height="350" className="rounded-sm" alt="Main image" />
+              <Image src={mainImgUrl || slider.length > 1 ? slider[1].url : slider[0].url} quality="100" width="600" height="350" className="rounded-sm" alt="Main image" />
               <div className="w-[100%] flex flex-row justify-between border-t-2 rounded-sm p-[.4em] mt-2 en">
                 {
                   slider.map((img, index) =>
@@ -63,19 +63,19 @@ export default function Work({ token }) {
           </div>
           <div className="sm:w-[100%] xl:w-[80%] h-[80%] sm:mt-2 lg:mt-0">
             <div data-aos="fade-down">
-              <h1 className="sm:text-[1.89rem] md:text-[2.4rem] lg:text-[2.7rem] xl:text-[2.9rem] text-blue_color font-bold">
+              <h1 className="sm:text-[1.89rem] md:text-[2.4rem] lg:text-[2.7rem] xl:text-[2.9rem] text-custom_green font-bold">
                 {arTitle}
               </h1>
               <time className="sm:text-[.8rem] lg:text-[.9rem]">{date.published}</time>
             </div>
 
-            <textarea readOnly value={description} className="sm:w-[100%] xl:w-[90%] sm:h-[92%] lg:h-[80%] lg:text-[1.02rem] xl:text-[1.11rem] leading-7 bg-white_color mt-5 outline-none resize-none">
+            <textarea readOnly value={description} className="sm:w-[100%] xl:w-[90%] sm:h-[92%] lg:h-[80%] lg:text-[1.02rem] xl:text-[1.11rem] leading-7 bg-none mt-5 outline-none resize-none">
             </textarea>
           </div>
         </div>
         <div className="w-[100%] p-[.3rem] mt-4">
           <div className="flex items-center">
-            <div data-aos="fade-left" className="w-2 sm:h-10 lg:h-10 rounded-md" style={{ background: "linear-gradient(129.85deg, #3B82F6 24.63%, #B388EB 65.62%)" }}></div>
+            <div data-aos="fade-left" className="w-2 sm:h-10 lg:h-10 gradient-line rounded-md"></div>
             <div className="inline-flex items-center">
               <h2 className="text-[1.3rem] mr-2">معلومات اضافية</h2>
               {

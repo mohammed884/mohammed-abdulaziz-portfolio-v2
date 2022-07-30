@@ -18,10 +18,10 @@ export default function ProjectList({ project, index }) {
             hover:underline
             text-black 
             flex
-            sm:text-[1.5rem]
+            sm:text-[1.3rem]
             md:text-[2.1rem] 
-            lg:text-[2.25rem]
-            xl:text-[3rem]
+            lg:text-[2.2rem]
+            xl:text-[2.4rem]
             font-medium 
             absolute 
             right-0 
