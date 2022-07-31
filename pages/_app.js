@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "../styles/globals.css";
-import "@fontsource/cairo";
+// import "@fontsource/cairo";
 import Layout from "../components/Layout"
 import {
   QueryClient,

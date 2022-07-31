@@ -21,7 +21,7 @@ export default function Header({ isAdmin }) {
                         menu-line menu-line-3 ${isOpen ? "rotate-[-46deg] bg-red-500" : "absolute top-[22px] rotate-0 bg-[#D29D2B]"}
                     `}></div>
                 </div>
-                <span className="font-bold">Dev. Mohammed</span>
+                <span className="font-bold name">Dev. Mohammed        </span>
             </div>
             <nav className="w-[100%]">
                 <ul className={`

@@ -31,7 +31,7 @@ export default function Home({ token }) {
       <Head>
         <title>Mohammed Abdulaziz</title>
       </Head>
-      <Slider />
+      {/* <Slider /> */}
       <Header isAdmin={isAdmin} homeRef={homeRef} worksRef={worksRef} servicesRef={servicesRef} />
       <main ref={mainRef} className="bg-[#FEFBF6] overflow-hidden scroll-smooth">
         <HomePage homeRef={homeRef} />
