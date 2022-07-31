@@ -9,7 +9,6 @@ export default function Document() {
                 <meta name="theme-color" content="#4285f4" />
                 <link rel="icon" href="/icon.png" />
                 <link rel="apple-touch-icon" href="/icon.png" />
-                <link href="//db.onlinewebfonts.com/c/0e979bd4a3c1c6ac788ed57ac569667f?family=revicons" rel="stylesheet" type="text/css"/>
 
             </Head>
             <body className="bg-custom_beige">
