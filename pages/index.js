@@ -2,7 +2,6 @@ import { useRef } from "react";
 import Header from '../components/Header.js';
 import HomePage from "../components/HomePage.js";
 import Projects from "../components/Projects.js";
-import Slider from "../components/Slider";
 import WhyMe from "../components/WhyMe.js";
 import Head from "next/head";
 import { dehydrate, useQueries, QueryClient } from "react-query";
@@ -31,7 +30,6 @@ export default function Home({ token }) {
       <Head>
         <title>Mohammed Abdulaziz</title>
       </Head>
-      {/* <Slider /> */}
       <Header isAdmin={isAdmin} homeRef={homeRef} worksRef={worksRef} servicesRef={servicesRef} />
       <main ref={mainRef} className="bg-[#FEFBF6] overflow-hidden scroll-smooth">
         <HomePage homeRef={homeRef} />

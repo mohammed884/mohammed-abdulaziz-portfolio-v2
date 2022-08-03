@@ -1,9 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+@font-face {
+  font-family:"cairoFont";
+  src: url("../public/fonts/static/Cairo-Regular.ttf");
+  font-display: swap;
+}
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Cairo';
+  font-family: "cairoFont", sans-serif;
 }
 
 * {
