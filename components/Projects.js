@@ -43,7 +43,7 @@ export default function Works({ reviews, averageRating, isAdmin, projects }) {
                     }
                 </Carousel>
                 <ul>
-                    <li className="sm:w-[150px] md:w-[170px] h-[50px] flex items-center justify-center rounded-md text-[1rem] border-[3px] border-[#1A4D2E] text-slate-800 hover:border-[#123922] font-bold mt-10 cursor-pointer">
+                    <li className="sm:w-[150px] md:w-[170px] h-[50px] flex items-center justify-center rounded-md text-[1rem] border-[3px] border-[#1A4D2E] text-slate-800 hover:border-[#0f2e1b] font-bold mt-10 cursor-pointer">
                         <Link href="/review" passHref>اكتب تجربتك معي</Link>
                     </li>
                 </ul>

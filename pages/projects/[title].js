@@ -32,6 +32,7 @@ export default function Work({ token }) {
     const { data } = await axios.delete("/api/projects", { headers: { _id } });
     if (data.success) Router.push("/")
   };
+  console.log(mainImgUrl);
   return (
     <section className="section-styling sm:h-[130vh]">
       <Header isAdmin={isAdmin} />
@@ -42,12 +43,10 @@ export default function Work({ token }) {
         <div className="w-[100%] flex sm:flex-col lg:flex-row-reverse items-center">
           <div className="sm:w-[100%] md:w-[80%] lg:w-[56%] h-[80%] mx-auto mt-8">
             <div className="max-w-[95%] mx-auto flex flex-col relative justify-center">
-              <Image src={mainImgUrl || slider.length > 1 ? slider[1].url : slider[0].url} quality="100" width="600" height="350" className="rounded-sm" alt="Main image" />
+              <Image src={mainImgUrl === "" ? slider.length > 1 ? slider[1].url : slider[0].url : mainImgUrl} quality="100" width="600" height="350" className="rounded-sm" alt="Main image" />
               <div className="w-[100%] flex flex-row justify-between border-t-2 rounded-sm p-[.4em] mt-2 en">
                 {
                   slider.map((img, index) =>
-                    index !== 0
-                    &&
                     <Image
                       key={index}
                       onClick={() => setMainImgUrl(img.url)}

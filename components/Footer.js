@@ -5,7 +5,7 @@ import { faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 export default function Footer() {
   return (
     <footer className="w-[100%] h-[10vh] flex flex-col justify-center items-center">
-      <p className="font-semibold">Developed By Mohammed Abdulaziz 2022 ©</p>
+      <p className="font-semibold">Developed By Mohammed Abdulaziz 2022©</p>
       <div className="mt-3">
         <Link passHref href="https://www.instagram.com/dev.mohammed1/?hl=en">
           <span className="text-xl text-red-500 cursor-pointer">
